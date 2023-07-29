@@ -1,5 +1,3 @@
-
-
 async function profileHandler(e) {
     e.preventDefault();
     const id = document.querySelector('#id').value;
