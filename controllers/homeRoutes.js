@@ -1,5 +1,3 @@
-// put code here to route to the home page
-
 // put code here
 const router = require('express').Router();
 const { User } = require('../models');
