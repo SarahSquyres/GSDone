@@ -1,9 +1,34 @@
-const withAuth = (req, res, next) => {
-    if (!req.session.logged_in) {
-      res.redirect("/login");
-    } else {
-      next();
+// put code here for authentication
+// Login
+router.post('/login', async (req, res) => {
+  try {
+    const dbUserData = await User.findOne({
+      where: {
+        email: req.body.username,
+      },
+    });
+    if (!dbUserData) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect username or password. Please try again!' });
+      return;
     }
-  };
-  
-  module.exports = withAuth;
+    const validPassword = await dbUserData.checkPassword(req.body.password);
+    if (!validPassword) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect username or password. Please try again!' });
+      return;
+    }
+    req.session.save(() => {
+      req.session.loggedIn = true;
+      res
+        .status(200)
+        .json({ user: dbUserData, message: 'You are now logged in!' });
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+module.exports = withAuth;
