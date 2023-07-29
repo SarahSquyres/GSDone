@@ -37,6 +37,7 @@ class User extends Model {
       },
     },
     {
+      //creates and updates a user's password
     //   hooks: {
     //     // POST
     //     beforeCreate: async (newUserData) => {
