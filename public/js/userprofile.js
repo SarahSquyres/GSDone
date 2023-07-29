@@ -10,6 +10,10 @@ async function profileHandler(e) {
             id,
             user_name,
             password,
+            first_name,
+            last_name,
+            bio,
+            profile_picture,
         }),
         headers: {
             'content-type': 'application/json',
