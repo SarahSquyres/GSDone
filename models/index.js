@@ -11,6 +11,11 @@ User.hasMany(List, {
     foreignKey: 'user_id'
   });
 
+  List.hasMany(Task, {
+    foreignKey: 'list_id',
+    onDelete: 'CASCADE'
+  });
+
   Task.belongsTo(List, {
     foreignKey: 'list_id'
   });
