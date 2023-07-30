@@ -7,10 +7,6 @@ router.post('/', async (req, res) => {
     const userData = await User.create({
       user_name: req.body.user_name,
       password: req.body.password,
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      bio: req.body.bio,
-      profile_picture: req.body.profile_picture,
     });
 
     req.session.save(() => {
@@ -62,7 +58,10 @@ router.put('/:id', async (req, res) => {
   try {
     const userData = await User.update(req.body, {
       where: {
-        id: req.params.id,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        bio: req.body.bio,
+        profile_picture: req.body.profile_picture,
       },
     });
     if (!userData) {
@@ -73,6 +72,7 @@ router.put('/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+
 });
 
 //delete user
