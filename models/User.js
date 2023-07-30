@@ -35,6 +35,26 @@ class User extends Model {
           len: [8],
         },
       },
+      first_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        },
+      
+      last_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+
+      },
+      bio: {
+        type: DataTypes.STRING,
+        allowNull: true,
+
+      },
+      profile_picture: {
+        type: DataTypes.STRING,
+        allowNull: true,
+
+      },
     },
     {
       //creates and updates a user's password
