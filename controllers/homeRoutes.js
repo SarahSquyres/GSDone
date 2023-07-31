@@ -1,8 +1,8 @@
 // put code here
 const router = require('express').Router();
 const { User } = require('../models');
-const withAuth = require('../utils/auth');
-
+// const withAuth = require('../utils/auth');
+//if we add a route to user profile uncommecment withAuth
 router.get('/', async (req, res) => {
   const userData = await User.findAll()
 
