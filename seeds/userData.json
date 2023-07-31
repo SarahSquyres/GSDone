@@ -1,26 +1,26 @@
 [
+  {
+      "user_name": "Sal",
+      "password": "password12345",
+      "first_name": "Salamander",
+      "last_name": "Salt",
+      "bio": "I am a salty salamander",
+      "profile_picture": "TBD"
+    },
     {
-        "user_name": "Sal",
-        "password": "password12345",
-        "first_name": "Salamander",
-        "last_name": "Salt",
-        "bio": "I am a salty salamander",
-        "profile_picture": "TBD"
-      },
-      {
-        "user_name": "Lernantino",
-        "password": "password12345",
-        "first_name": "Lernantino",
-        "last_name": "Book",
-        "bio": "I like to learn",
-        "profile_picture": "TBD"
-      },
-      {
-        "user_name": "Amiko",
-        "password": "password12345",
-        "first_name": "Amiko",
-        "last_name": "Art",
-        "bio": "I like art",
-        "profile_picture": "TBD"
-      }
+      "user_name": "Lernantino",
+      "password": "password12345",
+      "first_name": "Lernantino",
+      "last_name": "Book",
+      "bio": "I like to learn",
+      "profile_picture": "TBD"
+    },
+    {
+      "user_name": "Amiko",
+      "password": "password12345",
+      "first_name": "Amiko",
+      "last_name": "Art",
+      "bio": "I like art",
+      "profile_picture": "TBD"
+    }
 ]
