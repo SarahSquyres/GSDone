@@ -1,8 +1,8 @@
-const router = require('express').Router();
-const { User } = require('../../models');
+const router = require("express").Router();
+const { User } = require("../../models");
 
 //create new user with username, password,  first name, last name, bio, and profile picture
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const userData = await User.create({
       user_name: req.body.user_name,
@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-      
+
       res.status(200).json(userData);
     });
   } catch (err) {
@@ -21,14 +21,16 @@ router.post('/', async (req, res) => {
 });
 
 //login
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { user_name: req.body.user_name } });
+    const userData = await User.findOne({
+      where: { user_name: req.body.user_name },
+    });
 
     if (!userData) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+        .json({ message: "Incorrect email or password, please try again" });
       return;
     }
 
@@ -37,24 +39,23 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+        .json({ message: "Incorrect email or password, please try again" });
       return;
     }
 
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-      
-      res.json({ user: userData, message: 'You are now logged in!' });
-    });
 
+      res.json({ user: userData, message: "You are now logged in!" });
+    });
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
 //update user info- username, password, first name, last name, bio, and profile picture
-router.put('/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const userData = await User.update(req.body, {
       where: {
@@ -65,18 +66,17 @@ router.put('/:id', async (req, res) => {
       },
     });
     if (!userData) {
-      res.status(404).json({ message: 'No user found with this id!' });
+      res.status(404).json({ message: "No user found with this id!" });
       return;
     }
     res.status(200).json(userData);
   } catch (err) {
     res.status(500).json(err);
   }
-
 });
 
 //delete user
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const userData = await User.destroy({
       where: {
@@ -84,7 +84,7 @@ router.delete('/:id', async (req, res) => {
       },
     });
     if (!userData) {
-      res.status(404).json({ message: 'No user found with this id!' });
+      res.status(404).json({ message: "No user found with this id!" });
       return;
     }
     res.status(200).json(userData);
@@ -94,7 +94,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 //logout
-router.post('/logout', (req, res) => {
+router.post("/logout", (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
       res.status(204).end();
@@ -105,7 +105,7 @@ router.post('/logout', (req, res) => {
 });
 
 //testing route that works to display-- delete later
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const userData = await User.findAll();
     res.status(200).json(userData);
@@ -113,5 +113,17 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: "Darn userData not found" });
   }
 });
+
+
+//get all users
+
+//get a single user by id
+
+//create a new user
+
+//update a user by id
+
+//delete a user by id
+
 
 module.exports = router;
