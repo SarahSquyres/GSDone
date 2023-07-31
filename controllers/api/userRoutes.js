@@ -9,8 +9,7 @@ router.post('/', async (req, res) => {
       password: req.body.password,
       first_name: req.body.first_name,
       last_name: req.body.last_name,
-      bio: req.body.bio,
-      profile_picture: req.body.profile_picture,
+//add others if needed
     });
 
     req.session.save(() => {
@@ -28,7 +27,7 @@ router.post('/', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { user_name: req.body.user_name } });
-
+console.log(userData);
     if (!userData) {
       res
         .status(400)
@@ -41,7 +40,7 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+        .json({ message: 'incorrect password, please try again' });
       return;
     }
 
@@ -50,6 +49,7 @@ router.post('/login', async (req, res) => {
       req.session.logged_in = true;
       
       res.json({ user: userData, message: 'You are now logged in!' });
+      console.log("you are now logged in!");
     });
 
   } catch (err) {
@@ -62,7 +62,10 @@ router.put('/:id', async (req, res) => {
   try {
     const userData = await User.update(req.body, {
       where: {
-        id: req.params.id,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        bio: req.body.bio,
+        profile_picture: req.body.profile_picture,
       },
     });
     if (!userData) {
@@ -73,6 +76,7 @@ router.put('/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+
 });
 
 //delete user
@@ -110,7 +114,7 @@ router.get('/', async (req, res) => {
     const userData = await User.findAll();
     res.status(200).json(userData);
   } catch (err) {
-    res.status(500).json({ message: "userData not found" });
+    res.status(500).json({ message: "Darn userData not found" });
   }
 });
 

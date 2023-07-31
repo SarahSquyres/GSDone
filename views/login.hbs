@@ -1,4 +1,7 @@
 <form>
+<section class="title">
+    <h1></h1>
+</section>
   <div class="form-group">
     <label for="exampleInputEmail1">Username</label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -15,4 +18,21 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
+<script src=""></script>
+{{!-- add js script file for login event handling --}}
+{{!-- Your login.js file will have variables that reference the different input fields, 
+and you will attach event handler to some button that then groups the input values in an object
+and then you send that object to some api route for analysis 
+const userUsername
+const userPassword = getElementById('exampleInputPassword1')
+const userEmail = document.getElementById('exampleInputEmail1')
+const enteredPassword = userPassword.value; // the stored value is whatever the user entered for password
+fetch(someUrlOrEndpoint, {
+  method: 'POST',
+  body: {
+    user_name: enteredUsername,
+    password: enteredPassword
+  }
+})
+--}}
 {{!-- change email ids later --}}
