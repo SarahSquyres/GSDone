@@ -1,3 +1,4 @@
+
 const User = require('./User');
 const List = require('./List');
 const Task = require('./Task');
@@ -21,4 +22,3 @@ User.hasMany(List, {
   });
   
   module.exports = { User, List, Task };
-  
