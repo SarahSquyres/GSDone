@@ -1,26 +1,82 @@
 [
     {
-        "user_name": "Sal",
-        "password": "password12345",
-        "first_name": "Salamander",
-        "last_name": "Salt",
-        "bio": "I am a salty salamander",
-        "profile_picture": "TBD"
-      },
-      {
-        "user_name": "Lernantino",
-        "password": "password12345",
-        "first_name": "Lernantino",
-        "last_name": "Book",
-        "bio": "I like to learn",
-        "profile_picture": "TBD"
-      },
-      {
-        "user_name": "Amiko",
-        "password": "password12345",
-        "first_name": "Amiko",
-        "last_name": "Art",
-        "bio": "I like art",
-        "profile_picture": "TBD"
-      }
+      "id": 1,
+      "first_name": "Berny",
+      "last_name": "Cordell",
+      "password": "yA4#w@ewA)",
+      "profile_picture": "http://dummyimage.com/235x100.png/dddddd/000000",
+      "user_name": "bcordell0"
+    },
+    {
+      "id": 2,
+      "first_name": "Jammal",
+      "last_name": "Storry",
+      "password": "kZ6%$Y,%H<f!",
+      "profile_picture": "http://dummyimage.com/141x100.png/ff4444/ffffff",
+      "user_name": "jstorry1"
+    },
+    {
+      "id": 3,
+      "first_name": "Vassili",
+      "last_name": "O'Crigan",
+      "password": "aM7#_1@H'{x",
+      "profile_picture": "http://dummyimage.com/164x100.png/ff4444/ffffff",
+      "user_name": "vocrigan2"
+    },
+    {
+      "id": 4,
+      "first_name": "Daron",
+      "last_name": "McQuode",
+      "password": "vS9`t8\"\\P6",
+      "profile_picture": "http://dummyimage.com/101x100.png/cc0000/ffffff",
+      "user_name": "dmcquode3"
+    },
+    {
+      "id": 5,
+      "first_name": "Roosevelt",
+      "last_name": "Priddle",
+      "password": "eZ1<u)4F)E)Fr3c",
+      "profile_picture": "http://dummyimage.com/103x100.png/dddddd/000000",
+      "user_name": "rpriddle4"
+    },
+    {
+      "id": 6,
+      "first_name": "Julianna",
+      "last_name": "Haily",
+      "password": "uT8*>Nn~PZXQq%",
+      "profile_picture": "http://dummyimage.com/164x100.png/ff4444/ffffff",
+      "user_name": "jhaily5"
+    },
+    {
+      "id": 7,
+      "first_name": "Bessy",
+      "last_name": "Greatrex",
+      "password": "kU9.2Mqd4.n.",
+      "profile_picture": "http://dummyimage.com/212x100.png/dddddd/000000",
+      "user_name": "bgreatrex6"
+    },
+    {
+      "id": 8,
+      "first_name": "Jamil",
+      "last_name": "Arnow",
+      "password": "uG9(\"jg*",
+      "profile_picture": "http://dummyimage.com/164x100.png/ff4444/ffffff",
+      "user_name": "jarnow7"
+    },
+    {
+      "id": 9,
+      "first_name": "Maegan",
+      "last_name": "Conring",
+      "password": "tH5<4u.+\\7#n1d%#",
+      "profile_picture": "http://dummyimage.com/141x100.png/5fa2dd/ffffff",
+      "user_name": "mconring8"
+    },
+    {
+      "id": 10,
+      "first_name": "Gertrude",
+      "last_name": "Boost",
+      "password": "hC9&JKlS<e,6mf",
+      "profile_picture": "http://dummyimage.com/243x100.png/5fa2dd/ffffff",
+      "user_name": "gboost9"
+    }
 ]
