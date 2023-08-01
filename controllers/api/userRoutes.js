@@ -1,70 +1,135 @@
-const router = require('express').Router();
-const { User } = require('../../models');
+const router = require("express").Router();
+const { User } = require("../../models");
 
-router.get('/', async (req, res) => {
-    try {
-      const userData = await User.findAll();
+//create new user with username, password,  first name, last name, bio, and profile picture
+router.post("/", async (req, res) => {
+  try {
+    const userData = await User.create({
+      user_name: req.body.user_name,
+      password: req.body.password,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+//add others if needed
+    });
+
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+
       res.status(200).json(userData);
-    } catch (err) {
-      res.status(500).json({ message: "userData not found" });
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+//login
+router.post("/login", async (req, res) => {
+  try {
+    const userData = await User.findOne({ where: { user_name: req.body.user_name } });
+
+    if (!userData) {
+      res
+        .status(400)
+        .json({ message: "Incorrect email or password, please try again" });
+      return;
     }
-  });
 
-  module.exports = router;
-// router.post('/', async (req, res) => {
-//   try {
-//     const userData = await User.create(req.body);
+    const validPassword = await userData.checkPassword(req.body.password);
 
-//     req.session.save(() => {
-//       req.session.user_id = userData.id;
-//       req.session.logged_in = true;
+    if (!validPassword) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
+    }
 
-//       res.status(200).json(userData);
-//     });
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
-
-// router.post('/login', async (req, res) => {
-//   try {
-//     const userData = await User.findOne({ where: { user_name: req.body.user_name } });
-
-//     if (!userData) {
-//       res
-//         .status(400)
-//         .json({ message: 'Incorrect email or password, please try again' });
-//       return;
-//     }
-
-//     const validPassword = await userData.checkPassword(req.body.password);
-
-//     if (!validPassword) {
-//       res
-//         .status(400)
-//         .json({ message: 'Incorrect email or password, please try again' });
-//       return;
-//     }
-
-//     req.session.save(() => {
-//       req.session.user_id = userData.id;
-//       req.session.logged_in = true;
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
       
-//       res.json({ user: userData, message: 'You are now logged in!' });
-//     });
+      res.json({ user: userData, message: 'You are now logged in!' });
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
+//find a user by id and add first name, last name, bio, and profile picture
+router.put("/:id", async (req, res) => {
+  try {
+    const userData = await User.update(
+      {
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        bio: req.body.bio,
+        profile_picture: req.body.profile_picture,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    if (!userData) {
+      res.status(404).json({ message: "No user found with this id!" });
+      return;
+    }
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
-// router.post('/logout', (req, res) => {
-//   if (req.session.logged_in) {
-//     req.session.destroy(() => {
-//       res.status(204).end();
-//     });
-//   } else {
-//     res.status(404).end();
-//   }
-// });
+//delete user
+router.delete("/:id", async (req, res) => {
+  try {
+    const userData = await User.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    if (!userData) {
+      res.status(404).json({ message: "No user found with this id!" });
+      return;
+    }
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
+//logout
+router.post("/logout", (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
+});
+
+//testing route that works to display-- delete later
+router.get("/", async (req, res) => {
+  try {
+    const userData = await User.findAll();
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json({ message: "Darn userData not found" });
+  }
+});
+
+
+//get all users
+
+//get a single user by id
+
+//create a new user
+
+//update a user by id
+
+//delete a user by id
+
+
+module.exports = router;
