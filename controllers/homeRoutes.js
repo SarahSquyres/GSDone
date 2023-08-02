@@ -2,19 +2,23 @@
 const router = require('express').Router();
 const { User } = require('../models');
 // const withAuth = require('../utils/auth');
-//if we add a route to user profile uncommecment withAuth
+
+// routes to get user_name, bio, profile_pic then render tasks
 router.get('/', async (req, res) => {
-  const userData = await User.findAll()
-
-  const users = userData.map((user) =>
-  user.get({ plain: true })
-  );
-
-
-  // Send the rendered Handlebars.js template back as the response
-  res.render('homepage', {
-    users, 
-  });
+  try {
+    const userData = await User.findAll({
+      attributes: { exclude: ['password'] },
+    });
+    const users = userData.map((project) => project.get({ plain: true }));
+    res.render('homepage', {
+      users,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
+// routes to get user_name, bio, profile_pic and posts
+
 
 module.exports = router;

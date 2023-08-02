@@ -1,31 +1,44 @@
 # GSDone
-```` bash
-- Must use Node.js and Express.js to create a RESTful API
 
-- Must use Handlebars.js as the template engine
+## Table of Contents
 
-- Must use MySQL and the Sequelize ORM for the database
+* [Description](#description)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Contributions](#contributions)
+* [License](#license)
+* [Sources](#sources)
+* [Questions](#questions)
 
-- Must have both GET and POST routes for retrieving and adding new data
 
-- Must use at least one new library, package, or technology that we haven’t discussed
+## Description
 
-- Must have a folder structure that meets the MVC paradigm
+GSDone is a task management application that allows users to create, update, and delete tasks. Users can also share their tasks to a feed where other users can view and comment on them.
 
-- Must include authentication (express-session and cookies) 
+## Installation
 
-- Must protect API keys and sensitive information with environment variables
-````
-```` bash
-- Must be deployed using Heroku (with data)
+To install the necessary dependencies, run the following command:
 
--Must have a polished UI
+\`\`\`
+npm i
+\`\`\`
 
-- Must be responsive
+## Usage
 
-- Must be interactive (i.e., accept and respond to user input)
+To use this application, run the following command:
 
-- Must meet good-quality coding standards (file structure, best practices, etc.)
+\`\`\`
+npm start
+\`\`\`
 
-- Must have a professional README (unique name, description, link to the deployed app)
-```` 
+## Contributions
+
+To contribute to this project, please send an email to the address listed below.
+
+## License
+
+This project is licensed under the MIT license.
+
+## Sources
+
+

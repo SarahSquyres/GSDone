@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
       password: req.body.password,
       first_name: req.body.first_name,
       last_name: req.body.last_name,
-//add others if needed
+      //add others if needed
     });
 
     req.session.save(() => {
@@ -26,7 +26,9 @@ router.post("/", async (req, res) => {
 //login
 router.post("/login", async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { user_name: req.body.user_name } });
+    const userData = await User.findOne({
+      where: { user_name: req.body.user_name },
+    });
 
     if (!userData) {
       res
@@ -40,15 +42,15 @@ router.post("/login", async (req, res) => {
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+        .json({ message: "Incorrect email or password, please try again" });
       return;
     }
 
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-      
-      res.json({ user: userData, message: 'You are now logged in!' });
+
+      res.json({ user: userData, message: "You are now logged in!" });
     });
   } catch (err) {
     res.status(400).json(err);
@@ -110,16 +112,32 @@ router.post("/logout", (req, res) => {
   }
 });
 
-//testing route that works to display-- delete later
-router.get("/", async (req, res) => {
+//route to render user data, task data ,and list
+router.get("/:id", async (req, res) => {
   try {
-    const userData = await User.findAll();
-    res.status(200).json(userData);
+    const userData = await User.findByPk(req.params.id, {
+      attributes: { exclude: ["password"] },
+      include: [{ model: List }, { model: Task }],
+    });
+    const user = userData.get({ plain: true });
+    res.render("user", {
+      ...user,
+      logged_in: req.session.logged_in,
+    });
   } catch (err) {
-    res.status(500).json({ message: "Darn userData not found" });
+    res.status(500).json(err);
   }
 });
 
+//testing route that works to display-- delete later
+// router.get("/", async (req, res) => {
+//   try {
+//     const userData = await User.findAll();
+//     res.status(200).json(userData);
+//   } catch (err) {
+//     res.status(500).json({ message: "Darn userData not found" });
+//   }
+// });
 
 //get all users
 
@@ -130,6 +148,5 @@ router.get("/", async (req, res) => {
 //update a user by id
 
 //delete a user by id
-
 
 module.exports = router;

@@ -13,15 +13,38 @@ const PORT = process.env.PORT || 3001;
 
 const hbs = exphbs.create({ helpers });
 
-const sess = {
-  secret: 'Super secret secret',
-  cookie: {},
-  resave: false,
-  saveUninitialized: true,
+app.use(express.json());
+
+const sessionConfig = {
+  name:"monster", //name of cookie
+  secret: process.env.SECRET, //secret that makes the cookies effective
+  cookie: {
+    maxAge: 1000 * 60 * 60, //cookie expires after 1 hour
+    secure: false, //set to true if using https
+    httpOnly: true, //true means cookie is not accessible via front end JS
+  },
+  resave: false, //resave cookie even if no changes made
+  saveUninitialized: false, //don't save cookie if there is no data to store gdpr laws user has to give permission
   store: new SequelizeStore({
     db: sequelize
   })
-};
+}
+// const sess = {
+//   secret: 'Super secret secret',
+//   cookie: {
+//     maxAge: 300000,
+//     httpOnly: true,
+//     secure: false,
+//     sameSite: 'strict',
+//   },
+//   resave: false,
+//   saveUninitialized: true,
+//   store: new SequelizeStore({
+//     db: sequelize
+//   })
+// };
+
+
 
 //need hello work to test
 app.get('/hello/world', (req, res) => {
@@ -43,18 +66,6 @@ sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
 });
 
-// const sess = {
-//   secret: 'Super secret secret',
-//   cookie: {
-//     maxAge: 300000,
-//     httpOnly: true,
-//     secure: false,
-//     sameSite: 'strict',
-//   },
-//   resave: false,
-//   saveUninitialized: true,
-//   store: new SequelizeStore({
-//     db: sequelize
-//   })
-// };
+
+
 
