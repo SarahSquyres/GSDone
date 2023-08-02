@@ -1,21 +1,49 @@
 // put code here
 const router = require('express').Router();
-const { User } = require('../models');
+const { User, Task, List } = require('../models');
 // const withAuth = require('../utils/auth');
 
 
 //route to homepage
 router.get('/', async (req, res) => {
-  const userData = await User.findAll()
-
-  const users = userData.map((user) =>
+  const userData = await User.findAll({
+    include: [{ model: Task, List }]
+  });
+   const users = userData.map((user) =>
     user.get({ plain: true })
   );
-  res.render('homepage', {
-    users,
+
+  const taskData = await Task.findAll();
+
+  const tasks = taskData.map((task) =>
+    task.get({ plain: true })
+  );
+// why no lists?
+  const listData = await List.findAll();
+
+  const lists = listData.map((list) =>
+    list.get({ plain: true })
+  );
+
+  res.render('profile', {
+    users, 
+    tasks,
+    lists,
   });
 });
+// router.get('/', async (req, res) => {
+//   const listData = await List.findAll({
+//     include: [{ model: Task }]
+//   });
 
+//   const lists = listData.map((list) =>
+//     list.get({ plain: true })
+//   );
+
+//   res.render('homepage', {
+//     lists,
+//   });
+// });
 //route to profile page using auth 
 router.get('/profile', async (req, res) => {
   try {
