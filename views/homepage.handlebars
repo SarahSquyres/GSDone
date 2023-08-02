@@ -15,6 +15,14 @@
   {{ user.user_name }}
   {{ user.password }}
   {{/each}}
+
+  {{#each tasks as |task|}}
+  {{ task.task_description }}
+  {{/each}}
+
+  {{#each lists as |list|}}
+  {{ list.list_name }}
+  {{/each}}
 </section>
 </body>
 </html>
