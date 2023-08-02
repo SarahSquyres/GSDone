@@ -19,17 +19,18 @@ GSDone is a task management application that allows users to create, update, and
 
 To install the necessary dependencies, run the following command:
 
-\`\`\`
-npm i
-\`\`\`
+
+npm i 
+
+
 
 ## Usage
 
 To use this application, run the following command:
 
-\`\`\`
+
 npm start
-\`\`\`
+
 
 ## Contributions
 

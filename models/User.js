@@ -51,7 +51,6 @@ User.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    List_id: {
   },
   {
     //creates and updates a user's password

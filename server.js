@@ -15,7 +15,7 @@ const hbs = exphbs.create({ helpers });
 
 app.use(express.json());
 
-const sessionConfig = {
+const sess = {
   name:"monster", //name of cookie
   secret: process.env.SECRET, //secret that makes the cookies effective
   cookie: {
@@ -29,27 +29,7 @@ const sessionConfig = {
     db: sequelize
   })
 }
-// const sess = {
-//   secret: 'Super secret secret',
-//   cookie: {
-//     maxAge: 300000,
-//     httpOnly: true,
-//     secure: false,
-//     sameSite: 'strict',
-//   },
-//   resave: false,
-//   saveUninitialized: true,
-//   store: new SequelizeStore({
-//     db: sequelize
-//   })
-// };
 
-
-
-//need hello work to test
-app.get('/hello/world', (req, res) => {
-  res.send('Hello World!');
-});
 
 app.use(session(sess));
 
@@ -65,7 +45,6 @@ app.use(routes);
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
 });
-
 
 
 
