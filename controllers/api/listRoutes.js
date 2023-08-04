@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Task, List } = require('../../models');
+const { Task, List, User } = require('../../models');
 // const withAuth = require('../../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -30,11 +30,31 @@ router.get('/:id', async (req, res) => {
     }
   });
 
+  router.get('/users/:id', async (req, res) => {
+    try {
+      const listData = await List.findAll({
+          where : { user_id : req.body.user_id },
+          include: [{ model: User,
+          attributes: ['user_name'] }]
+        });
+  
+      if (!listData) {
+        res.status(404).json({ message: 'OH NO! No list found with this id' });
+        return;
+      }
+  
+      res.status(200).json(listData);
+    } catch (err) {
+      res.status(500).json({ message: 'sadFace, unable to find list' });
+    }
+  });
+
 // router.post('/', withAuth, async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const listData = await List.create({
             list_name: req.body.list_name,
+            user_id: req.body.user_id,
         });
 
         //   req.session.save(() => {

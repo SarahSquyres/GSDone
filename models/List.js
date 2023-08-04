@@ -14,6 +14,13 @@ List.init (
           list_name: {
             type: DataTypes.STRING,
           },
+          user_id: {
+            type: DataTypes.INTEGER,
+            references: {
+              model: 'user',
+              key: 'id',
+            },
+          },
     },
     {
         sequelize,
@@ -25,3 +32,5 @@ List.init (
     );
 
 module.exports = List;
+
+// add user to associate with list and tasks

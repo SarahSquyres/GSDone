@@ -57,4 +57,3 @@ sequelize.sync({ force: false }).then(() => {
 //     db: sequelize
 //   })
 // };
-

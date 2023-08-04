@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../../models");
+const { User, Task, List } = require("../../models");
 
 //create new user with username, password,  first name, last name, bio, and profile picture
 router.post("/", async (req, res) => {
@@ -22,6 +22,23 @@ router.post("/", async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+//route to render user data, task data ,and list data
+router.get("/:id", async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id, {
+      include: [{ model: List }, { model: Task }],
+    });
+    const user = userData.get({ plain: true });
+    res.render("profile", {
+      ...user,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 //login
 router.post("/login", async (req, res) => {

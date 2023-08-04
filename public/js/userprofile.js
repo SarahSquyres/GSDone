@@ -5,7 +5,7 @@ async function profileHandler(e) {
     const user_name = document.querySelector('#user_name').value;
 
     const response = await fetch(`/api/users`, {
-        method: 'GET',
+        method: 'POST',
         body: JSON.stringify({
             id,
             user_name,
