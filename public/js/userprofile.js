@@ -117,6 +117,7 @@ const newTaskHandler = async (event) => {
             document.location.replace(`/list/${task_list_id}`);
         } else {
             alert('Failed to create task');
+        }
 
 const updateProfHandler = async (e) => {
     if (e.target.hasAttribute('tasks')) {
