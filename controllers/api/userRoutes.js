@@ -1,3 +1,5 @@
+//login logout and create new user (sign up stuff)
+
 const router = require("express").Router();
 const { User, Task, List } = require("../../models");
 
@@ -9,7 +11,8 @@ router.post("/", async (req, res) => {
       password: req.body.password,
       first_name: req.body.first_name,
       last_name: req.body.last_name,
-      //add others if needed
+      bio: req.body.bio,
+      profile_picture: req.body.profile_picture,
     });
 
     req.session.save(() => {
@@ -20,22 +23,6 @@ router.post("/", async (req, res) => {
     });
   } catch (err) {
     res.status(400).json(err);
-  }
-});
-
-//route to render user data, task data ,and list data
-router.get("/:id", async (req, res) => {
-  try {
-    const userData = await User.findByPk(req.params.id, {
-      include: [{ model: List }, { model: Task }],
-    });
-    const user = userData.get({ plain: true });
-    res.render("profile", {
-      ...user,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
   }
 });
 
@@ -73,50 +60,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//find a user by id and add first name, last name, bio, and profile picture
-router.put("/:id", async (req, res) => {
-  try {
-    const userData = await User.update(
-      {
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        bio: req.body.bio,
-        profile_picture: req.body.profile_picture,
-      },
-      {
-        where: {
-          id: req.params.id,
-        },
-      }
-    );
-    if (!userData) {
-      res.status(404).json({ message: "No user found with this id!" });
-      return;
-    }
-    res.status(200).json(userData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-//delete user
-router.delete("/:id", async (req, res) => {
-  try {
-    const userData = await User.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
-    if (!userData) {
-      res.status(404).json({ message: "No user found with this id!" });
-      return;
-    }
-    res.status(200).json(userData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 //logout
 router.post("/logout", (req, res) => {
   if (req.session.logged_in) {
@@ -128,41 +71,6 @@ router.post("/logout", (req, res) => {
   }
 });
 
-//route to render user data, task data ,and list
-router.get("/:id", async (req, res) => {
-  try {
-    const userData = await User.findByPk(req.params.id, {
-      attributes: { exclude: ["password"] },
-      include: [{ model: List }, { model: Task }],
-    });
-    const user = userData.get({ plain: true });
-    res.render("user", {
-      ...user,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
-//testing route that works to display-- delete later
-// router.get("/", async (req, res) => {
-//   try {
-//     const userData = await User.findAll();
-//     res.status(200).json(userData);
-//   } catch (err) {
-//     res.status(500).json({ message: "Darn userData not found" });
-//   }
-// });
-
-//get all users
-
-//get a single user by id
-
-//create a new user
-
-//update a user by id
-
-//delete a user by id
 
 module.exports = router;
