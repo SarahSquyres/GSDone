@@ -31,19 +31,7 @@ router.get('/', async (req, res) => {
     lists,
   });
 });
-// router.get('/', async (req, res) => {
-//   const listData = await List.findAll({
-//     include: [{ model: Task }]
-//   });
 
-//   const lists = listData.map((list) =>
-//     list.get({ plain: true })
-//   );
-
-//   res.render('homepage', {
-//     lists,
-//   });
-// });
 //route to profile page using auth 
 router.get('/profile', async (req, res) => {
   try {

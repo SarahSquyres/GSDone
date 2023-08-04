@@ -2,6 +2,7 @@
 const User = require('./User');
 const List = require('./List');
 const Task = require('./Task');
+const Comment = require('./Comment');
 
 User.hasMany(List, {
     foreignKey: 'user_id',
@@ -25,5 +26,14 @@ User.hasMany(List, {
   Task.belongsTo(List, {
     foreignKey: 'list_id'
   });
-  
-  module.exports = { User, List, Task };
+
+  User.hasMany(Comment, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
+  });
+
+  Comment.belongsTo(User, {
+    foreignKey: 'user_id'
+  });
+
+  module.exports = { User, List, Task, Comment };
