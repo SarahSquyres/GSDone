@@ -12,8 +12,8 @@
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": "16.xx",
-    "npm": "6.xx"
+    "node": "16.x",
+    "npm": "6.x"
   },
   "dependencies": {
     "@multiavatar/multiavatar": "^1.0.7",
