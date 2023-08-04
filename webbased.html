@@ -3,7 +3,7 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-lg-9 col-xl-7">
                 <div class="card">
-                    <div class="rounded-top text-white d-flex flex-row" style="background-color: #f9f9f9; height:200px;">
+                    <div class="rounded-top text-white d-flex flex-row" style="background-color: #405341; height:200px;">
                         <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
                                 alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
@@ -13,8 +13,9 @@
                                 Update picture
                             </button>
                         </div>
+                        {{!-- user name not appearing --}}
                         <div class="ms-3" style="margin-top: 130px;">
-                            <h5>{{{}}}</h5>
+                            <h5>{{{ user.user_name }}}</h5>
                           </div>
                     </div>
                     <div class="p-4 text-black" style="background-color: #f8f9fa;">
@@ -23,18 +24,18 @@
                         <div class="mb-5">
                             <p class="lead fw-normal mb-1">About</p>
                             <div class="p-4" style="background-color: #f8f9fa;">
-                                <p class="userBio">User Bio Here</p>
+                                <p class="userBio">user bio</p>
                             </div>
                         </div>
                         <form action="">Insert form for new list and task here</form>
-                        <button>Submit New Task</button>
+                        <button>Submit</button>
                         <table class="table table-sm">
                             <thead>
                                 <tr>
-                                    <th colspan="100%">List Name</th>
+                                    <th colspan="100%">{{{ list.list_name }}}</th>
                                 </tr>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col">{{{ task.task_description }}}</th>
                                     <th scope="col">First</th>
                                     <th scope="col">Last</th>
                                     <th scope="col">Handle</th>

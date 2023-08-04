@@ -23,11 +23,6 @@ const sess = {
   })
 };
 
-//need hello work to test
-app.get('/hello/world', (req, res) => {
-  res.send('Hello World!');
-});
-
 app.use(session(sess));
 
 app.engine('handlebars', hbs.engine);
