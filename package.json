@@ -11,6 +11,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "16.xx",
+    "npm": "6.xx"
+  },
   "dependencies": {
     "@multiavatar/multiavatar": "^1.0.7",
     "bcrypt": "^5.0.0",

@@ -16,7 +16,7 @@ const loginHandler = async (e) => {
             headers: { 'Content-Type': 'application/json' },
         })
         if (res.ok) {
-            document.location.replace('/profile');
+            document.location.replace('/feedpage');
         } else {
             alert('Failed to log in');
         }
