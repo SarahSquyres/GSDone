@@ -1,11 +1,14 @@
 [
     {
-        "list_name": "List 1"
+        "list_name": "List 1",
+        "user_id": 1
       },
       {
-        "list_name": "List 2"
+        "list_name": "List 2",
+        "user_id": 2
       },
       {
-        "list_name": "List 3"
+        "list_name": "List 3",
+        "user_id": 3
       }
 ]
