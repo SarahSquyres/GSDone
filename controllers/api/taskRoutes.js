@@ -35,6 +35,24 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+router.get('/lists/:id', async (req, res) => {
+  try {
+    const taskData = await Task.findAll({
+        where : { list_id : req.body.list_id },
+        include: [{ model: List }]
+      });
+
+    if (!taskData) {
+      res.status(404).json({ message: 'OH NO! No task found with this id' });
+      return;
+    }
+
+    res.status(200).json(taskData);
+  } catch (err) {
+    res.status(500).json({ message: 'sadFace, unable to find task' });
+  }
+});
+
 // router.post('/', withAuth, async (req, res) => {
 router.post('/', async (req, res) => {
   try {

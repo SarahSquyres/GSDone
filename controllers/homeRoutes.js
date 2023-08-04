@@ -31,6 +31,7 @@ router.get('/', async (req, res) => {
     lists,
   });
 });
+
 //route to profile page using auth 
 router.get('/profile', async (req, res) => {
   try {
