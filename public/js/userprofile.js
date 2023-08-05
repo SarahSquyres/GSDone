@@ -1,19 +1,63 @@
-// const multiavatar = require("@multiavatar/multiavatar");
+const getList = (id) =>
+  fetch(`/api/lists/users/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
-// function getAvatar(user_name){
-//     let htmlContainer = document.querySelector('.userAvatar').src;
-//     if(user_name.length) {
-//         var svgEl = multiavatar(user_name);
-//         htmlContainer.innerHTML = svgEl;
-//     }
-//     else {
-//         htmlContainer.innerHTML = '';
-//     }
-// };
-// getAvatar();
+const saveList = (list) =>
+  fetch('/api/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(list),
+  });
 
-// delete task
-const delTaskHandler = async (e) => {
+  const deleteList = (id) =>
+  fetch(`/api/lists/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const editList = (list) =>
+  fetch(`/api/lists/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(list),
+  });
+
+//create new list --emily created this
+const newListHandler = async (event) => {
+    event.preventDefault();
+
+    const list_name = document.querySelector('#list_name').value.trim();
+    if (list_name) {
+        const response = await fetch(`/api/lists`, {
+            method: 'POST',
+            body: JSON.stringify({
+                list_name,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            document.location.replace(`/list/${list_name}`);
+        } else {
+            alert('Failed to create list');
+        }
+    }
+};
+
+//delete list
+const delListHandler = async (e) => {
     if (e.target.hasAttribute('tasks')) {
         const id = e.target.getAttribute('tasks');
 
@@ -29,112 +73,26 @@ const delTaskHandler = async (e) => {
     }
 };
 
-//create list 
-const createListHandler = async (e) => {
-    if (e.target.hasAttribute('form')) {
-        const id = e.target.getAttribute('form');
+//add list row to table
+const addListHandler = async (e) => {
+    
+    document.getElementById('list-btn').addEventListener('click', function () {
+        const listName = document.querySelector('list-name').value
+        const listTable = document.querySelector('listTable')
 
-        const response = await fetch(`/api/tasks/${id}`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({task_description}) //stringify object that takes in elements of form
-        });
+        for ( let i = 1; i <= listName, i++;) {
+            // const result = listName;
+            let newListName = listTable.insertRow(-1);
 
-        if (response.ok) {
-            document.location.replace('/profile');
-        } else {
-            alert('Failed to create task');
+            newListName.innerHTML = listName;
         }
-    }
-};
-
-
-//create task with hide and show 
-const createTaskHandler = async (e) => {
-    if (e.target.hasAttribute('form')) {
-        const id = e.target.getAttribute('form');
-
-        const response = await fetch(`/api/tasks/${id}`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({task_description}) //stringify object that takes in elements of form
-        });
-
-        if (response.ok) {
-            document.location.replace('/profile');
-        } else {
-            alert('Failed to create task');
-        }
-    }
-};
-
-const updateProfHandler = async (e) => {
-    if (e.target.hasAttribute('tasks')) {
-        const id = e.target.getAttribute('');
-
-        const response = await fetch(`/api/tasks`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data) //stringify object that takes in elements of form
-        });
-
-        if (response.ok) {
-            document.location.replace('/profile');
-        } else {
-            alert('Failed to update profile');
-        }
-    }
+    });
 };
 
 
 document
-    .querySelector('.delete')
-    .addEventListener('submit', delTaskHandler);
-
+    .querySelector('')
+    .addEventListener('submit', addListHandler);
 document
-    .querySelector('.new-task-form')
-    .addEventListener('submit', createListHandler);
-
-document
-    .querySelector('.new-task-form')
-    .addEventListener('submit', createTaskHandler);
-
-
-
-    // async function profileHandler(e) {
-//     e.preventDefault();
-//     const id = document.querySelector('#id').value;
-//     const password = document.querySelector('#password').value;
-//     const user_name = document.querySelector('#user_name').value;
-
-//     const response = await fetch(`/api/users`, {
-//         method: 'POST',
-//         body: JSON.stringify({
-//             id,
-//             user_name,
-//             password,
-//             first_name,
-//             last_name,
-//             bio,
-//             profile_picture,
-//         }),
-//         headers: {
-//             'content-type': 'application/json',
-//         },
-//     });
-//     if (response.ok) {
-//         document.location.replace('/');
-//     } else {
-//         alert('Failed to add profile');
-//     }
-// };
-
-// document
-//     .querySelector('.profile')
-//     .addEventListener('submit', profileHandler);
+    .querySelector('')
+    .addEventListener('submit', delListHandler);

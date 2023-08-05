@@ -4,8 +4,20 @@
   box-shadow: 5px 10px 10px 10px green;
 } */
 
-#navBar {
-    color: aquamarine;
+h3 {
+  font-family: "Segoe UI","Roboto","Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
 }
 
+p {
+  font-family: "Segoe UI","Roboto","Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: .75rem;
+  font-weight: 400;
+}
 
+label {
+  font-family: "Segoe UI","Roboto","Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: .75rem;
+  font-weight: 400;
+}
