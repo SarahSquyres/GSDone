@@ -1,9 +1,10 @@
 const sequelize = require('../config/connection');
-const { User, List, Task, Comment } = require('../models');
+const { User, List, Comment } = require('../models');
+// const { User, List, Task, Comment } = require('../models');
 
 const userData = require('./userData.json');
 const listData = require('./listData.json');
-const taskData = require('./taskData.json');
+// const taskData = require('./taskData.json');
 const commentData = require('./commentData.json');
 
 const seedDatabase = async () => {
@@ -20,12 +21,12 @@ const seedDatabase = async () => {
     });
   };
 
-  for (const task of taskData) {
-    const newTask = await Task.create({
-      ...task,
+  // for (const task of taskData) {
+  //   const newTask = await Task.create({
+  //     ...task,
 
-    });
-  }
+  //   });
+  // }
 
   for (const comment of commentData) {
     const newComment = await Comment.create({

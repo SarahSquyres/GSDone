@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const { Task, List, User } = require('../../models');
+const { List, User } = require('../../models');
+// const { Task, List, User } = require('../../models');
 // const withAuth = require('../../utils/auth');
 
 router.get('/', async (req, res) => {
     try {
-        const listData = await List.findAll({
-      include: [{ model: Task }]
-    });
+        const listData = await List.findAll()
+            // ({include: [{ model: Task }]});
         res.status(200).json(listData);
     } catch (err) {
         res.status(500).json({ message: "SadFace, listData not found" });
@@ -15,9 +15,8 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-      const listData = await List.findByPk(req.params.id, {
-        include: [{ model: Task }]
-      });
+      const listData = await List.findByPk()
+    //   (req.params.id,{include: [{ model: Task }]});
   
       if (!listData) {
         res.status(404).json({ message: 'No list found with this id' });
