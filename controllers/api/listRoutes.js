@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { List, User } = require('../../models');
 // const { Task, List, User } = require('../../models');
-// const withAuth = require('../../utils/auth');
+const withAuth = require('../../utils/auth');
 
 router.get('/', async (req, res) => {
     try {
@@ -15,9 +15,11 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-      const listData = await List.findByPk()
-    //   (req.params.id,{include: [{ model: Task }]});
-  
+      const listData = await List.findByPk(req.params.id, {
+        include: [{ model: User,
+        attributes: ['userUsername'] }]
+      });
+
       if (!listData) {
         res.status(404).json({ message: 'No list found with this id' });
         return;
@@ -28,13 +30,12 @@ router.get('/:id', async (req, res) => {
       res.status(500).json({ message: 'Unable to find list' });
     }
   });
-
   router.get('/users/:id', async (req, res) => {
     try {
       const listData = await List.findAll({
           where : { user_id : req.body.user_id },
           include: [{ model: User,
-          attributes: ['user_name'] }]
+          attributes: ['userUsername'] }]
         });
   
       if (!listData) {

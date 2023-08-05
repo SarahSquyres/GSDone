@@ -39,7 +39,7 @@ router.get('/profile', async (req, res) => {
   try {
    
     const userData = await User.findByPk(req.session.id, {
-      attributes: { exclude: ['password'] }
+      attributes: { exclude: ['userPassword'] }
     });
 
     const user = userData.get({ plain: true });

@@ -49,8 +49,8 @@ router.put("/:id", withAuth, async (req, res) => {
             {   
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
-                user_name: req.body.user_name,
-                password: req.body.password,
+                userUsername: req.body.userUsername,
+                userPassword: req.body.userPassword,
                 bio: req.body.bio,
                 profile_picture: req.body.profile_picture,
             },

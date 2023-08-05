@@ -22,17 +22,32 @@ const newListHandler = async (event) => {
     }
 };
 
-//delete list
+// //delete list
 const delListHandler = async (e) => {
     if (e.target.hasAttribute('tasks')) {
         const id = e.target.getAttribute('tasks');
-
         const response = await fetch(`/api/tasks/${id}`, {
             method: 'DELETE',
         });
-
         if (response.ok) {
             document.location.replace('/profile');
         } else {
             alert('Failed to delete task');
         }
+    };
+};
+
+// const delListHandler = async (e) => {
+//     if (e.target.hasAttribute('tasks')) {
+//         const id = e.target.getAttribute('tasks');
+
+//         const response = await fetch(`/api/tasks/${id}`, {
+//             method: 'DELETE',
+//         });
+
+//         if (response.ok) {
+//             document.location.replace('/profile');
+//         } else {
+//             alert('Failed to delete task');
+//         }
+//     }
