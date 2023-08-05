@@ -3,89 +3,89 @@
     "bio": "Multi-layered even-keeled data-warehouse",
     "first_name": "Remington",
     "last_name": "Tivolier",
-    "password": "mZ0\"lZD=zoH=",
+    "userPassword": "mZ0\"lZD=zoH=",
     "profile_picture": "http://dummyimage.com/162x100.png/ff4444/ffffff",
-    "user_name": "rtivolier0"
+    "userUsername": "rtivolier0"
   },
 
   {
     "bio": "Self-enabling motivating challenge",
     "first_name": "Cary",
     "last_name": "Donisthorpe",
-    "password": "eK2\\N#9&,MiSH$*_",
+    "userPassword": "eK2\\N#9&,MiSH$*_",
     "profile_picture": "http://dummyimage.com/237x100.png/ff4444/ffffff",
-    "user_name": "cdonisthorpe1"
+    "userUsername": "cdonisthorpe1"
   },
 
   {
     "bio": "Business-focused upward-trending productivity",
     "first_name": "Adria",
     "last_name": "Dunkerley",
-    "password": "sB6}c~S495)Gk@",
+    "userPassword": "sB6}c~S495)Gk@",
     "profile_picture": "http://dummyimage.com/169x100.png/5fa2dd/ffffff",
-    "user_name": "adunkerley2"
+    "userUsername": "adunkerley2"
   },
 
   {
     "bio": "Streamlined secondary secured line",
     "first_name": "Kelby",
     "last_name": "Lindmark",
-    "password": "kT0%'sQnN~8",
+    "userPassword": "kT0%'sQnN~8",
     "profile_picture": "http://dummyimage.com/100x100.png/5fa2dd/ffffff",
-    "user_name": "klindmark3"
+    "userUsername": "klindmark3"
   },
 
   {
     "bio": "Object-based holistic complexity",
     "first_name": "Reade",
     "last_name": "Lillicrop",
-    "password": "rB1\"%InzK!_lm",
+    "userPassword": "rB1\"%InzK!_lm",
     "profile_picture": "http://dummyimage.com/162x100.png/5fa2dd/ffffff",
-    "user_name": "rlillicrop4"
+    "userUsername": "rlillicrop4"
   },
 
   {
     "bio": "Upgradable radical approach",
     "first_name": "Joan",
     "last_name": "Syddall",
-    "password": "tT5.(!nFe5j",
+    "userPassword": "tT5.(!nFe5j",
     "profile_picture": "http://dummyimage.com/223x100.png/ff4444/ffffff",
-    "user_name": "jsyddall5"
+    "userUsername": "jsyddall5"
   },
 
   {
     "bio": "Organized contextually-based website",
     "first_name": "Rycca",
     "last_name": "Menco",
-    "password": "mP6_6o>eX",
+    "userPassword": "mP6_6o>eX",
     "profile_picture": "http://dummyimage.com/136x100.png/5fa2dd/ffffff",
-    "user_name": "rmenco6"
+    "userUsername": "rmenco6"
   },
 
   {
     "bio": "Adaptive content-based leverage",
     "first_name": "Fidole",
     "last_name": "Banaszczyk",
-    "password": "uX7}pS}o.<HK",
+    "userPassword": "uX7}pS}o.<HK",
     "profile_picture": "http://dummyimage.com/165x100.png/ff4444/ffffff",
-    "user_name": "fbanaszczyk7"
+    "userUsername": "fbanaszczyk7"
   },
 
   {
     "bio": "Virtual directional open architecture",
     "first_name": "Sula",
     "last_name": "Spradbery",
-    "password": "oX6#R(z>2#d`|3z",
+    "userPassword": "oX6#R(z>2#d`|3z",
     "profile_picture": "http://dummyimage.com/247x100.png/cc0000/ffffff",
-    "user_name": "sspradbery8"
+    "userUsername": "sspradbery8"
   },
   
   {
     "bio": "Object-based logistical moratorium",
     "first_name": "Anya",
     "last_name": "Atley",
-    "password": "jO5'ygNEZNs",
+    "userPassword": "jO5'ygNEZNs",
     "profile_picture": "http://dummyimage.com/245x100.png/dddddd/000000",
-    "user_name": "aatley9"
+    "userUsername": "aatley9"
   }
 ]

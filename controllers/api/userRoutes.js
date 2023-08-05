@@ -7,14 +7,14 @@ const { User, List } = require("../../models");
 router.post("/", async (req, res) => {
   try {
     const userData = await User.create({
-      user_name: req.body.user_name,
+      userUsername: req.body.userUsername,
         validate: {
           len: [6],
           unique: true,
             args: true,
             msg: "Username already exists",
         },
-      password: req.body.password,
+        userPassword: req.body.userPassword,
         //check for password length and if it is less than 6 characters, throw an error
         validate: {
           len: [6],
@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
 //login
 router.post("/login", async (req, res) => {
   try {
-    const userData = await User.findOne({where: { user_name: req.body.userUsername} });
+    const userData = await User.findOne({where: { userUsername: req.body.userUsername} });
 
     if (!userData) {
       res
@@ -168,8 +168,8 @@ router.put("/:id", async (req, res) => {
   try {
     const userData = await User.update(
       {
-        user_name: req.body.user_name,
-        password: req.body.password,
+        userUsername: req.body.userUsername,
+        userPassword: req.body.userPassword,
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         bio: req.body.bio,
