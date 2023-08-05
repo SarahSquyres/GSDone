@@ -1,121 +1,121 @@
-const router = require('express').Router();
-const { Task, List } = require('../../models');
+// const router = require('express').Router();
+// const { Task, List } = require('../../models');
 
-router.get('/', async (req, res) => {
-  const taskData = await Task.findAll();
+// router.get('/', async (req, res) => {
+//   const taskData = await Task.findAll();
 
-  const tasks = taskData.map((task) =>
-    task.get({ plain: true })
-  );
-  res.render('homepage', {
-    tasks,
-  });
-});
-
-// try {
-//  
-//   res.status(200).json(tasks);
-// } catch (err) {
-//   res.status(500).json({ message: "Tasks not found!" });
-// }
+//   const tasks = taskData.map((task) =>
+//     task.get({ plain: true })
+//   );
+//   res.render('homepage', {
+//     tasks,
+//   });
 // });
 
-router.get('/:id', async (req, res) => {
-  try {
-    const taskData = await Task.findByPk(req.params.id);
+// // try {
+// //  
+// //   res.status(200).json(tasks);
+// // } catch (err) {
+// //   res.status(500).json({ message: "Tasks not found!" });
+// // }
+// // });
 
-    if (!taskData) {
-      res.status(404).json({ message: 'No task found with this id' });
-      return;
-    }
+// router.get('/:id', async (req, res) => {
+//   try {
+//     const taskData = await Task.findByPk(req.params.id);
 
-    res.status(200).json(taskData);
-  } catch (err) {
-    res.status(500).json({ message: 'Unable to find task' });
-  }
-});
+//     if (!taskData) {
+//       res.status(404).json({ message: 'No task found with this id' });
+//       return;
+//     }
 
-router.get('/lists/:id', async (req, res) => {
-  try {
-    const taskData = await Task.findAll({
-        where : { list_id : req.body.list_id },
-        include: [{ model: List }]
-      });
+//     res.status(200).json(taskData);
+//   } catch (err) {
+//     res.status(500).json({ message: 'Unable to find task' });
+//   }
+// });
 
-    if (!taskData) {
-      res.status(404).json({ message: 'OH NO! No task found with this id' });
-      return;
-    }
+// router.get('/lists/:id', async (req, res) => {
+//   try {
+//     const taskData = await Task.findAll({
+//         where : { list_id : req.body.list_id },
+//         include: [{ model: List }]
+//       });
 
-    res.status(200).json(taskData);
-  } catch (err) {
-    res.status(500).json({ message: 'sadFace, unable to find task' });
-  }
-});
+//     if (!taskData) {
+//       res.status(404).json({ message: 'OH NO! No task found with this id' });
+//       return;
+//     }
 
-// router.post('/', withAuth, async (req, res) => {
-router.post('/', async (req, res) => {
-  try {
-    const taskData = await Task.create({
-      task_description: req.body.task_description,
-      list_id: req.body.list_id,
-    });
+//     res.status(200).json(taskData);
+//   } catch (err) {
+//     res.status(500).json({ message: 'sadFace, unable to find task' });
+//   }
+// });
 
-    //   req.session.save(() => {
-    //     req.session.user_id = userData.id;
-    //     req.session.logged_in = true;
+// // router.post('/', withAuth, async (req, res) => {
+// router.post('/', async (req, res) => {
+//   try {
+//     const taskData = await Task.create({
+//       task_description: req.body.task_description,
+//       list_id: req.body.list_id,
+//     });
 
-    //     res.status(200).json(listData);
-    //   });
+//     //   req.session.save(() => {
+//     //     req.session.user_id = userData.id;
+//     //     req.session.logged_in = true;
 
-    res.status(200).json(taskData);
-  } catch (err) {
-    res.status(400).json({ message: "SadFace, unable to create new task" });
-  }
-});
+//     //     res.status(200).json(listData);
+//     //   });
 
-router.put('/:id', async (req, res) => {
-  try {
-    const taskData = await Task.update(
-      {
-        task_description: req.body.task_description,
-        list_id: req.body.list_id,
-      },
-      {
-        where: {
-          id: req.params.id,
-        },
-      }
-    );
+//     res.status(200).json(taskData);
+//   } catch (err) {
+//     res.status(400).json({ message: "SadFace, unable to create new task" });
+//   }
+// });
 
-    if (!taskData) {
-      res.status(404).json({ message: 'No task found with this id!' });
-      return;
-    }
-    res.status(200).json({ message: "happyFace, task updated!!!" });
-  } catch (err) {
-    res.status(500).json({ message: "SadFace, unable to update task" });
-  }
-});
+// router.put('/:id', async (req, res) => {
+//   try {
+//     const taskData = await Task.update(
+//       {
+//         task_description: req.body.task_description,
+//         list_id: req.body.list_id,
+//       },
+//       {
+//         where: {
+//           id: req.params.id,
+//         },
+//       }
+//     );
 
-router.delete('/:id', async (req, res) => {
-  try {
-    const taskData = await Task.destroy({
-      where: {
-        id: req.params.id,
-        //   user_id: req.session.user_id,
-      },
-    });
+//     if (!taskData) {
+//       res.status(404).json({ message: 'No task found with this id!' });
+//       return;
+//     }
+//     res.status(200).json({ message: "happyFace, task updated!!!" });
+//   } catch (err) {
+//     res.status(500).json({ message: "SadFace, unable to update task" });
+//   }
+// });
 
-    if (!taskData) {
-      res.status(404).json({ message: 'No task found with this id!' });
-      return;
-    }
+// router.delete('/:id', async (req, res) => {
+//   try {
+//     const taskData = await Task.destroy({
+//       where: {
+//         id: req.params.id,
+//         //   user_id: req.session.user_id,
+//       },
+//     });
 
-    res.status(200).json({ message: "happyFace, task deleted!!!" });
-  } catch (err) {
-    res.status(500).json({ message: "SadFace, unable to delete task" });
-  }
-});
+//     if (!taskData) {
+//       res.status(404).json({ message: 'No task found with this id!' });
+//       return;
+//     }
 
-module.exports = router;
+//     res.status(200).json({ message: "happyFace, task deleted!!!" });
+//   } catch (err) {
+//     res.status(500).json({ message: "SadFace, unable to delete task" });
+//   }
+// });
+
+// module.exports = router;

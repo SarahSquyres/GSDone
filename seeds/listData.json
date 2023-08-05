@@ -1,14 +1,18 @@
 [
     {
         "list_name": "List 1",
+        "list_body":"Bo is looking for their lost son",
         "user_id": 1
       },
-      {
-        "list_name": "List 2",
+    {
+        "list_name": "List 1",
+        "list_body":"Sarah likes frogs",
         "user_id": 2
       },
-      {
-        "list_name": "List 3",
+    {
+        "list_name": "List 1",
+        "list_body":"Emily does crafts",
         "user_id": 3
       }
+
 ]
