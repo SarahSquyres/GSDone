@@ -17,7 +17,8 @@ const newListHandler = async (event) => {
         if (response.ok) {
             document.location.replace(`/list/${list_name}`);
         } else {
-            alert('Failed to create list');
+            alert('Failed to create list')
+        };
 
 // const multiavatar = require("@multiavatar/multiavatar");
 
