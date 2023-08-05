@@ -1,152 +1,124 @@
-//create new list --emily created this
-const newListHandler = async (event) => {
-    event.preventDefault();
+const router = require('express').Router();
+const { User, Comment } = require('../../models');
 
-    const list_name = document.querySelector('#list_name').value.trim();
-    if (list_name) {
-        const response = await fetch(`/api/lists`, {
-            method: 'POST',
-            body: JSON.stringify({
-                list_name,
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+router.get('/', async (req, res) => {
+  try {
+    const commentData = await Comment.findAll({
+        include: [{ model: User,
+        attributes: ['user_name'] }]
+      });
 
-        if (response.ok) {
-            document.location.replace(`/list/${list_name}`);
-        } else {
-            alert('Failed to create list');
-
-// const multiavatar = require("@multiavatar/multiavatar");
-
-// function getAvatar(user_name){
-//     let htmlContainer = document.querySelector('.userAvatar').src;
-//     if(user_name.length) {
-//         var svgEl = multiavatar(user_name);
-//         htmlContainer.innerHTML = svgEl;
-//     }
-//     else {
-//         htmlContainer.innerHTML = '';
-//     }
-// };
-// getAvatar();
-
-// delete task
-const delTaskHandler = async (e) => {
-    if (e.target.hasAttribute('tasks')) {
-        const id = e.target.getAttribute('tasks');
-
-        const response = await fetch(`/api/tasks/${id}`, {
-            method: 'DELETE',
-        });
-
-        if (response.ok) {
-            document.location.replace('/profile');
-        } else {
-            alert('Failed to delete task');
-        }
+    if (!commentData) {
+      res.status(404).json({ message: 'OH NO! No comment found!!' });
+      return;
     }
-};
 
-//create list 
-const createListHandler = async (e) => {
-    if (e.target.hasAttribute('form')) {
-        const id = e.target.getAttribute('form');
+    res.status(200).json(commentData);
+  } catch (err) {
+    res.status(500).json({ message: 'sadFace, unable to find comment' });
+  }
+});
 
-        const response = await fetch(`/api/tasks/${id}`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({task_description}) //stringify object that takes in elements of form
-        });
+router.get('/:id', async (req, res) => {
+  try {
+    const commentData = await Comment.findByPk(req.params.id, {
+        include: [{ model: User,
+        attributes: ['user_name'] }]
+      });
 
-        if (response.ok) {
-            document.location.replace('/profile');
-        } else {
-            alert('Failed to create task');
-        }
+    if (!commentData) {
+      res.status(404).json({ message: 'OH NO! No comment found with this id' });
+      return;
     }
-};
 
+    res.status(200).json(commentData);
+  } catch (err) {
+    res.status(500).json({ message: 'sadFace, unable to find comment' });
+  }
+});
 
-//create task with hide and show 
-const createTaskHandler = async (e) => {
-    if (e.target.hasAttribute('form')) {
-        const id = e.target.getAttribute('form');
+router.get('/users/:id', async (req, res) => {
+  try {
+    const commentData = await Comment.findAll({
+        where : { user_id : req.body.user_id },
+        include: [{ model: User,
+        attributes: ['user_name'] }]
+      });
 
-        const response = await fetch(`/api/tasks/${id}`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({task_description}) //stringify object that takes in elements of form
-        });
-
-        if (response.ok) {
-            document.location.replace('/profile');
-        } else {
-            alert('Failed to create task');
-
-        }
+    if (!commentData) {
+      res.status(404).json({ message: 'OH NO! No comment found with this id' });
+      return;
     }
-};
 
+    res.status(200).json(commentData);
+  } catch (err) {
+    res.status(500).json({ message: 'sadFace, unable to find comment' });
+  }
+});
 
-//create new task within a list
-const newTaskHandler = async (event) => {
-    event.preventDefault();
+// router.post('/', withAuth, async (req, res) => {
+router.post('/', async (req, res) => {
+  try {
+    const commentData = await Comment.create({
+      comment_body: req.body.comment_body,
+      user_id: req.body.user_id,
+    });
 
-    const task_description = document.querySelector('#task_description').value.trim();
-    const task_list_id = document.querySelector('#task_list_id').value.trim();
-    if (task_description && task_list_id) {
-        const response = await fetch(`/api/tasks`, {
-            method: 'POST',
-            body: JSON.stringify({
-                task_description,
-                task_list_id,
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        
-        if (response.ok) {
-            document.location.replace(`/list/${task_list_id}`);
-        } else {
-            alert('Failed to create task');
+    //   req.session.save(() => {
+    //     req.session.user_id = userData.id;
+    //     req.session.logged_in = true;
 
-const updateProfHandler = async (e) => {
-    if (e.target.hasAttribute('tasks')) {
-        const id = e.target.getAttribute('');
+    //     res.status(200).json(listData);
+    //   });
 
-        const response = await fetch(`/api/tasks`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data) //stringify object that takes in elements of form
-        });
+    res.status(200).json(commentData);
+  } catch (err) {
+    res.status(400).json({ message: "sadFace, unable to create new comment" });
+  }
+});
 
-        if (response.ok) {
-            document.location.replace('/profile');
-        } else {
-            alert('Failed to update profile');
+router.put('/:id', async (req, res) => {
+  try {
+    const commentData = await Comment.update(
+      {
+        comment_body: req.body.comment_body,
+        user_id: req.body.user_id,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
 
-        }
+    if (!commentData) {
+      res.status(404).json({ message: 'OH NO! No comment found with this id' });
+      return;
     }
-};
+    res.status(200).json({ message: "happyFace, comment updated!!!" });
+  } catch (err) {
+    res.status(500).json({ message: "SadFace, unable to update comment" });
+  }
+});
 
-document
-    .querySelector('.delete')
-    .addEventListener('submit', delTaskHandler);
+router.delete('/:id', async (req, res) => {
+  try {
+    const commentData = await Comment.destroy({
+      where: {
+        id: req.params.id,
+        //   user_id: req.session.user_id,
+      },
+    });
 
-document
-    .querySelector('.new-task-form')
-    .addEventListener('submit', createListHandler);
+    if (!commentData) {
+      res.status(404).json({ message: 'OH NO! No comment found with this id' });
+      return;
+    }
 
-document
-    .querySelector('.new-task-form')
-    .addEventListener('submit', createTaskHandler);
+    res.status(200).json({ message: "happyFace, comment deleted!!!" });
+  } catch (err) {
+    res.status(500).json({ message: "SadFace, unable to delete comment" });
+  }
+});
+
+module.exports = router;

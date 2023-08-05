@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
     res.status(400).json(err);
   }
 });
-
+  
 
 //login
 router.post("/login", async (req, res) => {
@@ -162,36 +162,6 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-//update a single user information by id by typing in http://localhost:3001/api/users/(id number)
-router.put("/:id", async (req, res) => {
-  try {
-    const userData = await User.update(
-      {
-        user_name: req.body.user_name,
-        password: req.body.password,
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        bio: req.body.bio,
-        profile_picture: req.body.profile_picture,
-      },
-      {
-        where: {
-          id: req.params.id,
-        },
-      }
-    );
-    if (!userData) {
-      res.status(404).json({ message: "No user found with this id!" });
-      return;
-    }
-    res.status(200).json(userData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-
 
 
 
