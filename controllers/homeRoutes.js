@@ -54,7 +54,7 @@ router.get('/profile', async (req, res) => {
 //route to login page 
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
-    res.redirect('/profile');
+    res.redirect('/feedpage');
     return;
   }
 
