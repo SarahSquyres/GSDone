@@ -62,7 +62,7 @@ const handleListDelete = (e) => {
     e.stopPropagation();
 
     const list = e.target;
-    const listId = JSON.parse(list.parentElement.getAttribute('data-note')).id;
+    // const listId = JSON.parse(list.parentElement.getAttribute('not sure what goes here')).id;
 
     if (activeList.id === listId) {
         activeList = {};
@@ -74,6 +74,11 @@ const handleListDelete = (e) => {
     });
 };
 
+const handleListView = (e) => {
+    e.preventDefault();
+    activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+    renderActiveNote();
+  };
 
 
 
