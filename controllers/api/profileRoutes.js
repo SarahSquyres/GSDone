@@ -47,8 +47,8 @@ router.put("/:id", withAuth, async (req, res) => {
                 },
             },
             {   
-                first_name: req.body.first_name,
-                last_name: req.body.last_name,
+              firstName: req.body.firstName,
+              lastName: req.body.lastName,
                 userUsername: req.body.userUsername,
                 userPassword: req.body.userPassword,
                 bio: req.body.bio,
@@ -106,8 +106,8 @@ router.get("/:id", async (req, res) => {
     try {
       const userData = await User.update(
         {
-          first_name: req.body.first_name,
-          last_name: req.body.last_name,
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
           bio: req.body.bio,
           profile_picture: req.body.profile_picture,
         },

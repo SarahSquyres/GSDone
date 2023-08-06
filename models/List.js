@@ -18,6 +18,12 @@ List.init (
           list_name: {
             type: DataTypes.STRING,
           },
+
+          list_body:{
+            type: DataTypes.STRING,
+            allowNull: true,
+          },
+
           user_id: {
             type: DataTypes.INTEGER,
             references: {
