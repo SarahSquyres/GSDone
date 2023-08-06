@@ -1,4 +1,5 @@
- // put code here
+const listEndpoints = require('express-list-endpoints');
+
 const router = require('express').Router();
 const { User, List } = require('../models');
 // const { User, Task, List } = require('../models');
@@ -27,7 +28,7 @@ router.get('/', async (req, res) => {
     list.get({ plain: true })
   );
 
-  res.render('profile', {
+  res.render('login', {
     users, 
     // tasks,
     lists,
@@ -74,3 +75,5 @@ router.get('/feedpage', (req, res) => {
   res.render('feedpage');
 });
 module.exports = router;
+
+console.log(listEndpoints(router));
