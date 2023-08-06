@@ -1,23 +1,25 @@
 // put code here
 const router = require('express').Router();
-const { User, Task, List } = require('../models');
+const { User, List } = require('../models');
+// const { User, Task, List } = require('../models');
 // const withAuth = require('../utils/auth');
 
 
 //route to homepage
 router.get('/', async (req, res) => {
   const userData = await User.findAll({
-    include: [{ model: Task, List }]
+    include: [{ model: List }]
+    // include: [{ model: Task, List }]
   });
    const users = userData.map((user) =>
     user.get({ plain: true })
   );
 
-  const taskData = await Task.findAll();
+  // const taskData = await Task.findAll();
 
-  const tasks = taskData.map((task) =>
-    task.get({ plain: true })
-  );
+  // const tasks = taskData.map((task) =>
+  //   task.get({ plain: true })
+  // );
 // why no lists?
   const listData = await List.findAll();
 
@@ -27,17 +29,22 @@ router.get('/', async (req, res) => {
 
   res.render('profile', {
     users, 
-    tasks,
+    // tasks,
     lists,
   });
 });
 
 //route to profile page using auth 
 router.get('/profile', async (req, res) => {
+
+  // TODO: Remove redirect and fix the crash that shows json instead
+  res.redirect('/');
+
+
   try {
    
     const userData = await User.findByPk(req.session.id, {
-      attributes: { exclude: ['password'] }
+      attributes: { exclude: ['userPassword'] }
     });
 
     const user = userData.get({ plain: true });
@@ -54,7 +61,7 @@ router.get('/profile', async (req, res) => {
 //route to login page 
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
-    res.redirect('/profile');
+    res.redirect('/');
     return;
   }
 

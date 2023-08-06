@@ -3,6 +3,10 @@ const sequelize = require('../config/connection');
 
 class List extends Model {}
 
+// TODO: Either remove list_body)
+// or have it allowNull: true
+// Either way, you need to re-seed
+
 List.init (
     {
         id: {

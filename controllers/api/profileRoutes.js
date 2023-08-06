@@ -49,8 +49,8 @@ router.put("/:id", withAuth, async (req, res) => {
             {   
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
-                user_name: req.body.user_name,
-                password: req.body.password,
+                userUsername: req.body.userUsername,
+                userPassword: req.body.userPassword,
                 bio: req.body.bio,
                 profile_picture: req.body.profile_picture,
             },
@@ -87,7 +87,8 @@ router.delete("/:id", withAuth, async (req, res) => {
 router.get("/:id", async (req, res) => {
     try {
       const userData = await User.findByPk(req.params.id, {
-        include: [{ model: List }, { model: Task }],
+        include: [{ model: List }]
+          // , { model: Task },
       });
       const user = userData.get({ plain: true });
       res.render("profile", {

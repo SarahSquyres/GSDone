@@ -1,20 +1,20 @@
 //login logout and create new user (sign up stuff)
 
 const router = require("express").Router();
-const { User, Task, List } = require("../../models");
+const { User, List } = require("../../models");
 
 //create new user with username, password,  first name, last name, bio, and profile picture
 router.post("/", async (req, res) => {
   try {
     const userData = await User.create({
-      user_name: req.body.user_name,
+      userUsername: req.body.userUsername,
         validate: {
           len: [6],
           unique: true,
             args: true,
             msg: "Username already exists",
         },
-      password: req.body.password,
+        userPassword: req.body.userPassword,
         //check for password length and if it is less than 6 characters, throw an error
         validate: {
           len: [6],
@@ -44,13 +44,22 @@ router.post("/", async (req, res) => {
   }
 });
 
+//get all users- type in http://localhost:3001/api/users
+router.get("/", async (req, res) => {
+  try {
+    const userData = await User.findAll({
+      include: [{ model: List }, { model: Task }],
+    });
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //login
 router.post("/login", async (req, res) => {
   try {
-    const userData = await User.findOne({
-      where: { user_name: req.body.enteredUsername},
-    });
+    const userData = await User.findOne({where: { userUsername: req.body.userUsername} });
 
     if (!userData) {
       res
@@ -59,7 +68,7 @@ router.post("/login", async (req, res) => {
       return;
     }
 
-    const validPassword = await userData.checkPassword(req.body.enteredPassword);
+    const validPassword = await userData.checkPassword(req.body.userPassword);
 
     if (!validPassword) {
       res
@@ -94,7 +103,8 @@ router.post("/logout", (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id, {
-      include: [{ model: List }, { model: Task }],
+      include: [{ model: List }] 
+        // { model: Task },
     });
     const user = userData.get({ plain: true });
     res.render("profile", {
@@ -137,7 +147,8 @@ router.put("/:id", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const userData = await User.findAll({
-      include: [{ model: List }, { model: Task }],
+      include: [{ model: List }] 
+        // { model: Task },
     });
     res.status(200).json(userData);
   } catch (err) {
@@ -168,8 +179,8 @@ router.put("/:id", async (req, res) => {
   try {
     const userData = await User.update(
       {
-        user_name: req.body.user_name,
-        password: req.body.password,
+        userUsername: req.body.userUsername,
+        userPassword: req.body.userPassword,
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         bio: req.body.bio,
