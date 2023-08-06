@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const { List, User } = require('../../models');
 // const { Task, List, User } = require('../../models');
-// const withAuth = require('../../utils/auth');
+const withAuth = require('../../utils/auth');
 
 router.get('/', async (req, res) => {
     try {
         const listData = await List.findAll()
-            // ({include: [{ model: Task }]});
+
         res.status(200).json(listData);
     } catch (err) {
         res.status(500).json({ message: "SadFace, listData not found" });
@@ -15,8 +15,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-      const listData = await List.findByPk()
-    //   (req.params.id,{include: [{ model: Task }]});
+      const listData = await List.findByPk(req.params.id)
   
       if (!listData) {
         res.status(404).json({ message: 'No list found with this id' });
@@ -29,12 +28,10 @@ router.get('/:id', async (req, res) => {
     }
   });
 
-  router.get('/users/:id', async (req, res) => {
+  router.get('/users/:id',  async (req, res) => {
     try {
       const listData = await List.findAll({
-          where : { user_id : req.body.user_id },
-          include: [{ model: User,
-          attributes: ['user_name'] }]
+          where : { user_id : req.params.id },
         });
   
       if (!listData) {
@@ -50,10 +47,16 @@ router.get('/:id', async (req, res) => {
 
 // router.post('/', withAuth, async (req, res) => {
 router.post('/', async (req, res) => {
+    console.log("Checking what we will send to database")
+    console.log(req.body);
+    console.log(req.session.user_id)
     try {
         const listData = await List.create({
             list_name: req.body.list_name,
+
+            list_body:req.body.list_body,
             user_id: req.body.user_id,
+
         });
 
         //   req.session.save(() => {
@@ -65,7 +68,7 @@ router.post('/', async (req, res) => {
 
         res.status(200).json(listData);
     } catch (err) {
-        res.status(400).json({ message: "SadFace, unable to create new list" });
+        res.status(400).json({ message: "SadFace, unable to create new list because " + err });
     }
 });
 
@@ -74,6 +77,8 @@ router.put('/:id', async (req, res) => {
         const listData = await List.update(
             {
                 list_name: req.body.list_name,
+                list_body:req.body.list_body,
+                user_id: req.body.user_id,
             },
             {
                 where: {

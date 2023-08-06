@@ -4,7 +4,7 @@ const sequelize = require("../config/connection");
 
 class User extends Model {
   checkPassword(loginPw) {
-    return bcrypt.compareSync(loginPw, this.password);
+    return bcrypt.compareSync(loginPw, this.userPassword);
   }
 }
 
@@ -16,19 +16,30 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    user_name: {
+    userUsername: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    password: {
+
+
+
+    //   email: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false,
+    //     unique: true,
+    //     validate: {
+    //       isEmail: true,
+    //     },
+    //   },
+    userPassword: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    first_name: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    last_name: {
+    lastName: {
       type: DataTypes.STRING,
       allowNull: true,
     },
@@ -47,13 +58,13 @@ User.init(
     hooks: {
       // POST
       beforeCreate: async (newUserData) => {
-        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        newUserData.userPassword = await bcrypt.hash(newUserData.userPassword, 10);
         return newUserData;
       },
       // PUT
       beforeUpdate: async (updatedUserData) => {
-        updatedUserData.password = await bcrypt.hash(
-          updatedUserData.password,
+        updatedUserData.userPassword = await bcrypt.hash(
+          updatedUserData.userPassword,
           10
         );
         return updatedUserData;

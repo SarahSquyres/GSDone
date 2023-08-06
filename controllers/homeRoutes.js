@@ -36,10 +36,15 @@ router.get('/', async (req, res) => {
 
 //route to profile page using auth 
 router.get('/profile', async (req, res) => {
+
+  // TODO: Remove redirect and fix the crash that shows json instead
+  res.redirect('/');
+
+
   try {
    
     const userData = await User.findByPk(req.session.id, {
-      attributes: { exclude: ['password'] }
+      attributes: { exclude: ['userPassword'] }
     });
 
     const user = userData.get({ plain: true });
@@ -56,7 +61,7 @@ router.get('/profile', async (req, res) => {
 //route to login page 
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
-    res.redirect('/feedpage');
+    res.redirect('/');
     return;
   }
 

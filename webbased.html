@@ -1,4 +1,5 @@
-<section class="h-100 gradient-custom-2">
+
+<!-- <section class="h-100 gradient-custom-2">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-lg-9 col-xl-7">
@@ -15,7 +16,7 @@
                         </div>
                         {{!-- user name not appearing --}}
                         <div class="ms-3" style="margin-top: 130px;">
-                            <h5>{{{ user.user_name }}}</h5>
+                            <h5>{{{ user.userUsername }}}</h5>
                           </div>
                     </div>
                     <div class="p-4 text-black" style="background-color: #f8f9fa;">
@@ -70,4 +71,51 @@
         </div>
     </div>
     </div>
-</section>
+</section> -->
+=======
+<div class="col-md-6">
+  <h3>Create a New List</h3>
+
+  <form class="form new-list-form">
+      <div class="form-group">
+          <label for="list-name">List Name:</label>
+          <input class="form-input" type="text" id="list-name" name="list-name" />
+      </div>
+      <div class="form-group">
+          <button id="list-btn" type="submit" class="btn btn-primary">Create</button>
+      </div>
+  </form>
+</div> 
+
+<br><br>
+<table id="listTable">
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+
+<div class="col-md-6">
+  <h3>Create a New Task</h3>
+
+  <form class="form new-task-form">
+      <div class="form-group">
+          <label for="task-name">Task Description:</label>
+          <input class="form-input" type="text" id="task-name" name="task-name" />
+      </div>
+      <div class="form-group">
+          <button id="task-btn" type="submit" class="btn btn-primary">Create</button>
+      </div>
+  </form>
+</div>
+
+for JS
+- Add a click event listener to button 
+- Get required elements and their values such as inputs and button and store these in variables 
+- Get the table tag and store it in a variable
+- Start a for loop starting from 1 and ending at provided records limit
+- Multiply given number with the number that is being incremented
+- Generate table row and its innerHTML with multiplied result  
+
