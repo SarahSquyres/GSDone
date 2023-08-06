@@ -19,7 +19,6 @@ User.init(
     userUsername: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
 
 
@@ -35,9 +34,6 @@ User.init(
     userPassword: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        len: [6],
-      },
     },
     firstName: {
       type: DataTypes.STRING,
@@ -54,6 +50,7 @@ User.init(
     profile_picture: {
       type: DataTypes.STRING,
       allowNull: true,
+      
     },
   },
   {
