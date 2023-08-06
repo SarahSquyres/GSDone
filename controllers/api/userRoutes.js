@@ -1,6 +1,3 @@
-//login logout and create new user (sign up stuff)
-const listEndpoints = require('express-list-endpoints');
-
 const router = require("express").Router();
 const { User, List } = require("../../models");
 
@@ -44,18 +41,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-//get all users- type in http://localhost:3001/api/users
-router.get("/", async (req, res) => {
-  try {
-    const userData = await User.findAll({
-      include: [{ model: List }],
-    });
-    res.status(200).json(userData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 //login
 router.post("/login", async (req, res) => {
   try {
@@ -85,6 +70,7 @@ router.post("/login", async (req, res) => {
     });
   } catch (err) {
     res.status(400).json(err);
+    alert("Error occurred")
   }
 });
 
@@ -100,20 +86,21 @@ router.post("/logout", (req, res) => {
 });
 
 //route to render profile and list data
-router.get("/:id", async (req, res) => {
-  try {
-    const userData = await User.findByPk(req.params.id, {
-      include: [{ model: List }] 
-    });
-    const user = userData.get({ plain: true });
-    res.render("profile", {
-      ...user,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+
+// router.get("/:id", async (req, res) => {
+//   try {
+//     const userData = await User.findByPk(req.params.id, {
+//       include: [{ model: List }] 
+//     });
+//     const user = userData.get({ plain: true });
+//     res.render("profile", {
+//       ...user,
+//       logged_in: req.session.logged_in,
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 
 //find a user by id and update info
@@ -121,8 +108,6 @@ router.put("/:id", async (req, res) => {
   try {
     const userData = await User.update(
       {
-        userUsername: req.body.userUsername,
-        userPassword: req.body.userPassword,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         bio: req.body.bio,
@@ -144,19 +129,8 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-//get all users- type in http://localhost:3001/api/users
-router.get("/", async (req, res) => {
-  try {
-    const userData = await User.findAll({
-      include: [{ model: List }] 
-    });
-    res.status(200).json(userData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
-//delete a user by id and all associated tasks and lists by typing in http://localhost:3001/api/users/(id number)
+//delete user in DB by ID using insomnia 
 router.delete("/:id", async (req, res) => {
   try {
     const userData = await User.destroy({
@@ -202,5 +176,16 @@ router.delete("/:id", async (req, res) => {
 //   }
 // });
 
+//for insomnia to get user info
+// router.get("/", async (req, res) => {
+//   try {
+//     const userData = await User.findAll({
+//       include: [{ model: List }],
+//     });
+//     res.status(200).json(userData);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
 module.exports = router;
-console.log(listEndpoints(router));

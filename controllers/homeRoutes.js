@@ -1,31 +1,41 @@
-const listEndpoints = require('express-list-endpoints');
-
 const router = require('express').Router();
 const { User, List } = require('../models');
-const withAuth = require('../utils/auth');
+// const withAuth = require('../utils/auth');
 
 
 //route to homepage
 router.get('/', async (req, res) => {
-  const userData = await User.findAll({
-    include: [{ model: List }]
-    // include: [{ model: Task, List }]
-  });
-   const users = userData.map((user) =>
-    user.get({ plain: true })
-  );
-  const listData = await List.findAll();
+  // const userData = await User.findAll({
+  //   include: [{ model: List }]
+  // });
+  //  const users = userData.map((user) =>
+  //   user.get({ plain: true })
+  // );
+  // const listData = await List.findAll();
 
-  const lists = listData.map((list) =>
-    list.get({ plain: true })
-  );
+  // const lists = listData.map((list) =>
+  //   list.get({ plain: true })
+  // );
 
-  res.render('login', {
-    users, 
-    lists,
-  });
+  res.render('login');
 });
 
+//route to render user data, task data ,and list data for specific users in a search
+// possibly change endpoint //add withAuth when fixed
+router.get("/:id", async (req, res) => {
+  try {
+    const userData = await User.findOne(req.params.user_id, {
+      include: [{ model: List }],
+    });
+    const user = userData.get({ plain: true });
+    res.render("profile", {
+      ...user,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 // //route to profile page using auth 
 router.get('/profile', async (req, res) => {
   try {
@@ -46,15 +56,16 @@ router.get('/profile', async (req, res) => {
   }
 });
 
-// //route to login page 
-// router.get('/login', (req, res) => {
-//   if (req.session.logged_in) {
-//     res.redirect('/feedpage');
-//     return;
-//   }
+//route to login page 
+//not the fucking problem
+router.get('/login', (req, res) => {
+  if (req.session.logged_in) {
+    res.redirect('/profile');
+    return;
+  }
 
-//   res.render('login');
-// });
+  res.render('login');
+});
 
 // //route to feeds page
 router.get('/feedpage', (req, res) => {
@@ -66,5 +77,3 @@ router.get('/feedpage', (req, res) => {
   res.render('feedpage');
 });
 module.exports = router;
-
-console.log(listEndpoints(router));

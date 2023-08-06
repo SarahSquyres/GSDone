@@ -4,9 +4,6 @@ const loginHandler = async (e) => {
     const userUsername = document.getElementById('inputUsername').value.trim();
     const userPassword = document.getElementById('inputPassword').value.trim();
 
-    // const enteredUsername = userUsername.value.trim();
-    // const enteredPassword = userPassword.value.trim();
-
     if (userPassword && userUsername) {
         console.log(userUsername);
         console.log(userPassword);
@@ -33,6 +30,8 @@ const signupFormHandler = async (e) => {
     const bio = document.getElementById('signUpBio').value.trim();
 
     if (userUsername && userPassword) {
+        console.log(userUsername);
+        console.log(userPassword);
         const res = await fetch('/api/users', {
             method: 'POST',
             body: JSON.stringify({ userUsername, userPassword, firstName, lastName, bio }),
@@ -40,7 +39,7 @@ const signupFormHandler = async (e) => {
         });
 
         if (res.ok) {
-            document.location.replace('/');
+            document.location.replace('/profile');
         } else {
             alert(res.statusText);
         }
