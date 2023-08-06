@@ -40,9 +40,7 @@ router.get('/:id', async (req, res) => {
 router.get('/users/:id', async (req, res) => {
   try {
     const commentData = await Comment.findAll({
-        where : { user_id : req.body.user_id },
-        include: [{ model: User,
-        attributes: ['userUsername'] }]
+        where : { user_id: req.params.id },
       });
 
     if (!commentData) {

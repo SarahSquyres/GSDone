@@ -39,11 +39,11 @@ User.init(
         len: [6],
       },
     },
-    first_name: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    last_name: {
+    lastName: {
       type: DataTypes.STRING,
       allowNull: true,
     },
