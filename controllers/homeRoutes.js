@@ -1,4 +1,4 @@
-// put code here
+ // put code here
 const router = require('express').Router();
 const { User, List } = require('../models');
 // const { User, Task, List } = require('../models');
@@ -36,13 +36,9 @@ router.get('/', async (req, res) => {
 
 //route to profile page using auth 
 router.get('/profile', async (req, res) => {
-
-  // TODO: Remove redirect and fix the crash that shows json instead
-  res.redirect('/');
-
-
   try {
-   
+//     // TODO: Remove redirect and fix the crash that shows json instead
+//  res.redirect('/');
     const userData = await User.findByPk(req.session.id, {
       attributes: { exclude: ['userPassword'] }
     });
@@ -61,7 +57,7 @@ router.get('/profile', async (req, res) => {
 //route to login page 
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
-    res.redirect('/');
+    res.redirect('/feedpage');
     return;
   }
 
