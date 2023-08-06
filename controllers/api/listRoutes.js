@@ -51,10 +51,13 @@ router.get('/:id', async (req, res) => {
 
 // router.post('/', withAuth, async (req, res) => {
 router.post('/', async (req, res) => {
+    console.log("Checking what we will send to database")
+    console.log(req.body);
+    console.log(req.session.user_id)
     try {
         const listData = await List.create({
             list_name: req.body.list_name,
-            user_id: req.body.user_id,
+            user_id: req.session.user_id,
         });
 
         //   req.session.save(() => {
@@ -66,7 +69,7 @@ router.post('/', async (req, res) => {
 
         res.status(200).json(listData);
     } catch (err) {
-        res.status(400).json({ message: "SadFace, unable to create new list" });
+        res.status(400).json({ message: "SadFace, unable to create new list because " + err });
     }
 });
 

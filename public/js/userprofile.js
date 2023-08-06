@@ -1,7 +1,16 @@
 let activeList = {};
 
-const listDescription = document.getElementById('#list-container');
-const createListBtn = document.getElementById('#save-list');
+const listDescription = document.getElementById('list-container');
+const createListBtn = document.getElementById('save-list');
+const inputListName = document.getElementById('task-name');
+
+// Prevent going to another page
+const formEl = document.querySelector('.new-task-form');
+formEl.addEventListener("submit", (event)=>{
+    event.preventDefault();
+    saveList();
+})
+
 
 const getList = (id) =>
     fetch(`/api/lists/users/${id}`, {
@@ -11,14 +20,28 @@ const getList = (id) =>
         },
     });
 
-const saveList = (list) =>
-    fetch('/api/', {
+const saveList = () => {
+    const inputListNameText = inputListName.value;
+    console.log("Checking what we will send to express route")
+    console.log(inputListNameText)
+
+    fetch('/api/lists', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(list),
-    });
+        body: JSON.stringify({list_name: inputListNameText}),
+    }).then(response=>response.json())
+    .then(data=>{
+        console.log(data);
+        // W3school
+        // var liEl = document.createElement("li")
+        // liEl.classList.add("some-class1")
+        // liEl.classList.add("some-class2")
+        // liEl.textContent = inputListName.value
+        // ulEl.appendChild(liEl)
+    })
+}
 
 const deleteList = (id) =>
     fetch(`/api/lists/${id}`, {

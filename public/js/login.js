@@ -16,7 +16,7 @@ const loginHandler = async (e) => {
             headers: { 'Content-Type': 'application/json' },
         })
         if (res.ok) {
-            document.location.replace('/feedpage');
+            document.location.replace('/profile');
         } else {
             alert(res.statusText);
         }
@@ -24,7 +24,7 @@ const loginHandler = async (e) => {
 };
 
 document
-    .querySelector('.login-form')
-    .addEventListener('submit', loginHandler);
+    .querySelector('#login-btn')
+    .addEventListener('click', loginHandler);
 
    
