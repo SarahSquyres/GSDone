@@ -27,4 +27,4 @@ document
     .querySelector('.login-form')
     .addEventListener('submit', loginHandler);
 
-    // password must be blah blah function
+   
