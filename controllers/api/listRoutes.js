@@ -6,7 +6,7 @@ const withAuth = require('../../utils/auth');
 router.get('/', async (req, res) => {
     try {
         const listData = await List.findAll()
-            // ({include: [{ model: Task }]});
+
         res.status(200).json(listData);
     } catch (err) {
         res.status(500).json({ message: "SadFace, listData not found" });
@@ -15,11 +15,8 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-      const listData = await List.findByPk(req.params.id, {
-        include: [{ model: User,
-        attributes: ['userUsername'] }]
-      });
-
+      const listData = await List.findByPk(req.params.id)
+  
       if (!listData) {
         res.status(404).json({ message: 'No list found with this id' });
         return;
@@ -30,12 +27,11 @@ router.get('/:id', async (req, res) => {
       res.status(500).json({ message: 'Unable to find list' });
     }
   });
-  router.get('/users/:id', async (req, res) => {
+
+  router.get('/users/:id',  async (req, res) => {
     try {
       const listData = await List.findAll({
-          where : { user_id : req.body.user_id },
-          include: [{ model: User,
-          attributes: ['userUsername'] }]
+          where : { user_id : req.params.id },
         });
   
       if (!listData) {
@@ -57,7 +53,10 @@ router.post('/', async (req, res) => {
     try {
         const listData = await List.create({
             list_name: req.body.list_name,
-            user_id: req.session.user_id,
+
+            list_body:req.body.list_body,
+            user_id: req.body.user_id,
+
         });
 
         //   req.session.save(() => {
@@ -78,6 +77,8 @@ router.put('/:id', async (req, res) => {
         const listData = await List.update(
             {
                 list_name: req.body.list_name,
+                list_body:req.body.list_body,
+                user_id: req.body.user_id,
             },
             {
                 where: {
