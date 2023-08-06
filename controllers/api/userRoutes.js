@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const userData = await User.findAll({
-      include: [{ model: List }, { model: Task }],
+      include: [{ model: List }],
     });
     res.status(200).json(userData);
   } catch (err) {
