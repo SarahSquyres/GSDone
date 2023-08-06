@@ -1,4 +1,5 @@
 //login logout and create new user (sign up stuff)
+const listEndpoints = require('express-list-endpoints');
 
 const router = require("express").Router();
 const { User, List } = require("../../models");
@@ -47,7 +48,7 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const userData = await User.findAll({
-      include: [{ model: List }, { model: Task }],
+      include: [{ model: List }],
     });
     res.status(200).json(userData);
   } catch (err) {
@@ -202,3 +203,4 @@ router.delete("/:id", async (req, res) => {
 // });
 
 module.exports = router;
+console.log(listEndpoints(router));
