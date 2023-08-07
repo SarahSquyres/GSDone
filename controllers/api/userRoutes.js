@@ -1,5 +1,4 @@
 //login logout and create new user (sign up stuff)
-const listEndpoints = require('express-list-endpoints');
 
 const router = require("express").Router();
 const { User, List } = require("../../models");
@@ -47,7 +46,7 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const userData = await User.findAll({
-      include: [{ model: List }],
+      include: [{ model: List }, { model: Task }],
     });
     res.status(200).json(userData);
   } catch (err) {
@@ -170,33 +169,5 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// //DUPLICATE update a single user information by id by typing in http://localhost:3001/api/users/(id number)
-// router.put("/:id", async (req, res) => {
-//   try {
-//     const userData = await User.update(
-//       {
-//         userUsername: req.body.userUsername,
-//         userPassword: req.body.userPassword,
-//         first_name: req.body.first_name,
-//         last_name: req.body.last_name,
-//         bio: req.body.bio,
-//         profile_picture: req.body.profile_picture,
-//       },
-//       {
-//         where: {
-//           id: req.params.id,
-//         },
-//       }
-//     );
-//     if (!userData) {
-//       res.status(404).json({ message: "No user found with this id!" });
-//       return;
-//     }
-//     res.status(200).json(userData);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
 module.exports = router;
-console.log(listEndpoints(router));
