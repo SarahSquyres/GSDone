@@ -1,18 +1,157 @@
 [
-    {
-        "list_name": "List 1",
-        "list_body":"Bo is looking for their lost son",
-        "user_id": 1
-      },
-    {
-        "list_name": "List 1",
-        "list_body":"Sarah likes frogs",
-        "user_id": 2
-      },
-    {
-        "list_name": "List 1",
-        "list_body":"Emily does crafts",
-        "user_id": 3
-      }
-
+  {
+    "list_name": "Quest For Power",
+    "list_body": "Find Sam",
+    "user_id": 1
+  }, 
+  {
+    "list_name": "Quest For Greatness",
+    "list_body": "Traverse Mount Doom",
+    "user_id": 1
+  }, 
+  {
+    "list_name": "Quest For Wisdom",
+    "list_body": "Find Gandalf",
+    "user_id": 1
+  }, 
+  {
+    "list_name": "Save the City",
+    "list_body": "Call Spider-man",
+    "user_id": 2
+  }, 
+  {
+    "list_name": "Save the World",
+    "list_body": "Defeat Thanos",
+    "user_id": 2
+  }, 
+  {
+    "list_name": "Save the Girl",
+    "list_body": "Call Aunt May",
+    "user_id": 2
+  }, 
+  {
+    "list_name": "Be A Father",
+    "list_body": "Call my kids.",
+    "user_id": 3
+  }, 
+  {
+    "list_name": "For My Dog",
+    "list_body": "Play Fetch",
+    "user_id": 3
+  }, 
+  {
+    "list_name": "For My Cat",
+    "list_body": "Buy Yarn",
+    "user_id": 3
+  }, 
+  {
+    "list_name": "For My Hamster",
+    "list_body": "Buy Wheel",
+    "user_id": 3
+  }, 
+  {
+    "list_name": "Jedi Training",
+    "list_body": "Find Yoda",
+    "user_id": 4
+  }, 
+  {
+    "list_name": "Lightsaber Training",
+    "list_body": "Spar with Ahsoka",
+    "user_id": 4
+  }, 
+  {
+    "list_name": "Bounty Hunt",
+    "list_body": "Kill Jabba",
+    "user_id": 4
+  }, 
+  {
+    "list_name": "Arms",
+    "list_body": "Bicep Curls",
+    "user_id": 5
+  }, 
+  {
+    "list_name": "Legs",
+    "list_body": "Squats",
+    "user_id": 5
+  }, 
+  {
+    "list_name": "Shoulders",
+    "list_body": "Shoulder Press",
+    "user_id": 5
+  }, 
+  {
+    "list_name": "Become Famous",
+    "list_body": "Make Controversial Video",
+    "user_id": 6
+  }, 
+  {
+    "list_name": "Grocery List",
+    "list_body": "Milk",
+    "user_id": 6
+  }, 
+  {
+    "list_name": "Grading",
+    "list_body": "Look thru math assignments",
+    "user_id": 6
+  }, 
+  {
+    "list_name": "Get Healthier",
+    "list_body": "Change Diet",
+    "user_id": 7
+  }, 
+  {
+    "list_name": "Get Taller",
+    "list_body": "Stretch",
+    "user_id": 7
+  },
+  {
+    "list_name": "Vacation",
+    "list_body": "Request time off.",
+    "user_id": 7
+  },
+  {
+    "list_name": "Powerpuff Recipe",
+    "list_body": "1. Sugar",
+    "user_id": 8
+  },
+  {
+    "list_name": "Become Lich King",
+    "list_body": "1. Kill Father",
+    "user_id": 8
+  },
+  {
+    "list_name": "Learn to Play Rogue",
+    "list_body": "1. Perform Kidney Shot",
+    "user_id": 8
+  },
+  {
+    "list_name": "Become Dragon Master",
+    "list_body": "1. Be Water",
+    "user_id": 9
+  },
+  {
+    "list_name": "Order 66",
+    "list_body": "1. Manipulate Anakin",
+    "user_id": 9
+  },
+  {
+    "list_name": "Become One Punch",
+    "list_body": "1. 100 sit ups",
+    "user_id": 9
+  },
+  {
+    "list_name": "Become Hokage",
+    "list_body": "1. Befriend Sasuke",
+    "user_id": 10
+  },
+  {
+    "list_name": "Chores",
+    "list_body": "1. Wash Dishes",
+    "user_id": 10
+  },
+  {
+    "list_name": "Claim Iron Throne",
+    "list_body": "Become Khaleesi",
+    "user_id": 10
+  },
 ]
