@@ -19,31 +19,16 @@ User.init(
     userUsername: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
-
-
-
-    //   email: {
-    //     type: DataTypes.STRING,
-    //     allowNull: false,
-    //     unique: true,
-    //     validate: {
-    //       isEmail: true,
-    //     },
-    //   },
     userPassword: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        len: [6],
-      },
     },
-    first_name: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    last_name: {
+    lastName: {
       type: DataTypes.STRING,
       allowNull: true,
     },
@@ -54,6 +39,7 @@ User.init(
     profile_picture: {
       type: DataTypes.STRING,
       allowNull: true,
+      
     },
   },
   {

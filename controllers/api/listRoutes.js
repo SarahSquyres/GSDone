@@ -3,70 +3,72 @@ const { List, User } = require('../../models');
 // const { Task, List, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-router.get('/', async (req, res) => {
+router.get('/',withAuth, async (req, res) => {
     try {
-        const listData = await List.findAll()
-            // ({include: [{ model: Task }]});
-        res.status(200).json(listData);
+
+        if(!req.session.logged_in){
+            res.status(200).json({tasks: []});
+        }
+
+        const listData = await List.findAll({
+            where:{
+                user_id: req.session.user_id
+            }
+        });
+
+        res.status(200).json({tasks: listData});
     } catch (err) {
-        res.status(500).json({ message: "SadFace, listData not found" });
+        console.log("error fetching tasks", err);
+        res.status(500).json({ message: "SadFace, listData not found", tasks:[] });
     }
 });
 
 router.get('/:id', async (req, res) => {
     try {
-      const listData = await List.findByPk(req.params.id, {
-        include: [{ model: User,
-        attributes: ['userUsername'] }]
-      });
+        const listData = await List.findByPk(req.params.id)
 
-      if (!listData) {
-        res.status(404).json({ message: 'No list found with this id' });
-        return;
-      }
-  
-      res.status(200).json(listData);
-    } catch (err) {
-      res.status(500).json({ message: 'Unable to find list' });
-    }
-  });
-  router.get('/users/:id', async (req, res) => {
-    try {
-      const listData = await List.findAll({
-          where : { user_id : req.body.user_id },
-          include: [{ model: User,
-          attributes: ['userUsername'] }]
-        });
-  
-      if (!listData) {
-        res.status(404).json({ message: 'OH NO! No list found with this id' });
-        return;
-      }
-  
-      res.status(200).json(listData);
-    } catch (err) {
-      res.status(500).json({ message: 'sadFace, unable to find list' });
-    }
-  });
-
-// router.post('/', withAuth, async (req, res) => {
-router.post('/', async (req, res) => {
-    try {
-        const listData = await List.create({
-            list_name: req.body.list_name,
-            user_id: req.body.user_id,
-        });
-
-        //   req.session.save(() => {
-        //     req.session.user_id = userData.id;
-        //     req.session.logged_in = true;
-
-        //     res.status(200).json(listData);
-        //   });
+        if (!listData) {
+            res.status(404).json({ message: 'No list found with this id' });
+            return;
+        }
 
         res.status(200).json(listData);
     } catch (err) {
-        res.status(400).json({ message: "SadFace, unable to create new list" });
+        res.status(500).json({ message: 'Unable to find list' });
+    }
+});
+
+router.get('/users/:id', async (req, res) => {
+    try {
+        const listData = await List.findAll({
+            where: { user_id: req.params.id },
+        });
+
+        if (!listData) {
+            res.status(404).json({ message: 'OH NO! No list found with this id' });
+            return;
+        }
+
+        res.status(200).json(listData);
+    } catch (err) {
+        res.status(500).json({ message: 'sadFace, unable to find list' });
+    }
+});
+
+
+router.post('/', withAuth, async (req, res) => {
+    try {
+
+        console.log('req body', req.body);
+
+        const newList = await List.create({
+            ...req.body,
+            user_id: req.session.user_id,
+        });
+console.log(newList);
+        res.status(200).json(newList);
+    } catch (err) {
+        res.status(400).json(err);
     }
 });
 
@@ -75,6 +77,8 @@ router.put('/:id', async (req, res) => {
         const listData = await List.update(
             {
                 list_name: req.body.list_name,
+                list_body: req.body.list_body,
+                user_id: req.body.user_id,
             },
             {
                 where: {
