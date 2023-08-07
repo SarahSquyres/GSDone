@@ -3,10 +3,6 @@ const sequelize = require('../config/connection');
 
 class List extends Model {}
 
-// TODO: Either remove list_body)
-// or have it allowNull: true
-// Either way, you need to re-seed
-
 List.init (
     {
         id: {
@@ -40,5 +36,3 @@ List.init (
     );
 
 module.exports = List;
-
-// add user to associate with list and tasks
