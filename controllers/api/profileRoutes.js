@@ -1,23 +1,22 @@
 const router = require("express").Router();
 const withAuth = require("../../utils/auth");
+const User = require("../../models/User");
 
 //route to display profile user name, bio, profile picture
-router.get("/", withAuth,  async (req, res) => {
+router.get("/",  async (req, res) => {
     try {
-        const profileData = await User.findAll({
+        const profileData = await User.findOne({
             where: {
-                user_id: req.session.user_id,
+                id: req.session.user_id,
             },
         });
         const profile = profileData.map((profile) =>
             profile.get({ plain: true })
         );
-        res.render("profile", {
-            layout: "",
-            profile,
-        });
+        console.log(profileData)
+        res.status(200).json(profileData);
     } catch (err) {
-        res.redirect("login");
+      res.status(500).json(err);
     }
 });
 

@@ -15,9 +15,9 @@ formEl.addEventListener("submit", (event)=>{
 const getList = (id) =>
     fetch(`/api/lists/users/${id}`, {
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        // headers: {
+        //     'Content-Type': 'application/json',
+        // },
     });
 
 const saveList = () => {
@@ -27,9 +27,9 @@ const saveList = () => {
 
     fetch('/api/lists', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        // headers: {
+        //     'Content-Type': 'application/json',
+        // },
         body: JSON.stringify({list_name: inputListNameText}),
     }).then(response=>response.json())
     .then(data=>{
@@ -46,17 +46,17 @@ const saveList = () => {
 const deleteList = (id) =>
     fetch(`/api/lists/${id}`, {
         method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        // headers: {
+        //     'Content-Type': 'application/json',
+        // },
     });
 
 const editList = (list) =>
     fetch(`/api/lists/${id}`, {
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        // headers: {
+        //     'Content-Type': 'application/json',
+        // },
         body: JSON.stringify(list),
     });
 

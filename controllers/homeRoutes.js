@@ -2,7 +2,7 @@
 const router = require('express').Router();
 const { User, List } = require('../models');
 // const { User, Task, List } = require('../models');
-// const withAuth = require('../utils/auth');
+const withAuth = require('../utils/auth');
 
 
 //route to homepage
@@ -34,29 +34,49 @@ router.get('/', async (req, res) => {
   });
 });
 
-//route to profile page using auth 
 router.get('/profile', async (req, res) => {
-
-  // TODO: Remove redirect and fix the crash that shows json instead
-  res.redirect('/');
-
-
   try {
-   
-    const userData = await User.findByPk(req.session.id, {
-      attributes: { exclude: ['userPassword'] }
-    });
-
-    const user = userData.get({ plain: true });
-
-    res.render('profile', {
-      ...user,
-      logged_in: true
-    });
+   const userData = await User.findOne(
+      {where: {id: req.session.user_id},
+      include: [{ model: List }]
+    }
+   );
+   const user = userData.get({ plain: true });
+ console.log(user)
+   res.render('profile', { user, logged_in: req.session.logged_in });
   } catch (err) {
-    res.status(500).json(err);
+  //  res.redirect('login');
+   console.log(err);
   }
-});
+ });
+
+
+//route to profile page using auth 
+// router.get('/profile', async (req, res) => {
+// console.log(req.session)
+  // TODO: Remove redirect and fix the crash that shows json instead
+  // if (req.session.logged_in) {
+  //   res.redirect('/');
+  //   return;
+  // }
+
+
+//   try {
+   
+//     const userData = await User.findByPk(req.session.user_id, {
+//       attributes: { exclude: ['userPassword'] }
+//     });
+
+//     const user = userData.get({ plain: true });
+// console.log(...user)
+//     res.render('profile', {
+//       ...user,
+//       logged_in: true
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 //route to login page 
 router.get('/login', (req, res) => {

@@ -2,7 +2,6 @@
 
 const router = require("express").Router();
 const { User, List } = require("../../models");
-
 //create new user with username, password,  first name, last name, bio, and profile picture
 router.post("/", async (req, res) => {
   try {
@@ -105,10 +104,7 @@ router.get("/:id", async (req, res) => {
       include: [{ model: List }] 
     });
     const user = userData.get({ plain: true });
-    res.render("profile", {
-      ...user,
-      logged_in: req.session.logged_in,
-    });
+    res.json(user);
   } catch (err) {
     res.status(500).json(err);
   }
