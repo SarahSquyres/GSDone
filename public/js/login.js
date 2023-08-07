@@ -18,7 +18,7 @@ const loginHandler = async (e) => {
         if (res.ok) {
             document.location.replace('/feedpage');
         } else {
-            alert(res.statusText);
+            console.log(res.statusText);
         }
     }
 };
