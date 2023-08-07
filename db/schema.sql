@@ -11,6 +11,4 @@ CREATE TABLE user (
     PRIMARY KEY (id)
 );
 
--- Path: db\seed.sql
-
 USE user_db;
