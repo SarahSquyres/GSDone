@@ -97,4 +97,27 @@ router.get('/feedpage', (req, res) => {
 
   res.render('feedpage');
 });
+
+
+router.get('/list/:id', async (req, res) => {
+  try {
+    const projectData = await User.findByPk(req.params.id, {
+      include: [
+        {
+          model: List,
+          attributes: ['list_name'],
+        },
+      ],
+    });
+
+    const list = userData.get({ plain: true });
+
+    res.render('list', {
+      ...list,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 module.exports = router;

@@ -51,17 +51,14 @@
                             <table class="table table-striped table-sm table-bordered">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th class="fw-normal" colspan="100%">{{{ list.list_name }}}</th>
-                                    </tr>
-                                    <tr>
-                                        <th class="tasks fw-normal" scope="col">{{{ task.task_description }}}</th>
-                                        <th scope="col">Task</th>
+                                        <th class="tasks fw-normal" scope="col">Check when done!</th>
+                                        <th scope="col">{{list.list_name}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr id="list-container">
                                         <th scope="row"><input class="todo__checkbox" type="checkbox"></th>
-                                        <td class="text-break">Go pick up lost son</td>
+                                        <td class="text-break">{{list.list_body}}</td>
                                     </tr>
                                 </tbody>
                             </table>
