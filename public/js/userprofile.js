@@ -15,9 +15,9 @@ formEl.addEventListener("submit", (event)=>{
 const getList = (id) =>
     fetch(`/api/lists/users/${id}`, {
         method: 'GET',
-        // headers: {
-        //     'Content-Type': 'application/json',
-        // },
+        headers: {
+            'Content-Type': 'application/json',
+        },
     });
 
 const saveList = () => {
