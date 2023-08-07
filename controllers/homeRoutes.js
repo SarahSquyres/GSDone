@@ -15,21 +15,14 @@ router.get('/', async (req, res) => {
     user.get({ plain: true })
   );
 
-  // const taskData = await Task.findAll();
-
-  // const tasks = taskData.map((task) =>
-  //   task.get({ plain: true })
-  // );
-// why no lists?
   const listData = await List.findAll();
 
   const lists = listData.map((list) =>
     list.get({ plain: true })
   );
 
-  res.render('profile', {
+  res.render('login', {
     users, 
-    // tasks,
     lists,
   });
 });
