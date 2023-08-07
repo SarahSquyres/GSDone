@@ -17,34 +17,25 @@
   </header>
   <nav id="navBar" class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="navbar-brand" href="#">Get Sh*t Done</div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    {{!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> --}}
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home</a>
-              <a href="/"></a>
-              {{#if loggedIn}}
-              <a id="logout" class="nav-link"  href="/login">Logout
-              <a class="nav-link" href="/profile">My Tasks</a>
-              {{else}}
-              <a class="nav-link" href="/login">Login/Sign Up</a>
-              {{/if}}</a>
-        </li>
-      </ul>
-    </div>
+     <!-- Conditionally render login or logout links -->
+        {{#if logged_in}}
+        {{!-- <a href="/feedpage">FeedPage</a> | --}}
+        <button class="no-button" id="logout">logout</button>
+        {{else}}
+        {{!-- <a href="/feedpage">FeedPage</a> | --}}
+        <a href="/login">login</a>
+        {{/if}}
   </nav>
   <main>
     <div class="tasks">
       {{{body}}}
     </div>
   </main>
-  {{!-- {{#if loggedIn}}
-  <script src="/js/logout.js"></script>
-  {{/if}} --}}
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -54,6 +45,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
+    <script src="/js/logout.js"></script>
 </body>
 
 </html>

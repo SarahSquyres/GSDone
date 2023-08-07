@@ -3,6 +3,7 @@ const { List, User } = require('../../models');
 // const { Task, List, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+//get all lists works. 
 router.get('/', async (req, res) => {
     try {
         const listData = await List.findAll()

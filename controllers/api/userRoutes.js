@@ -2,7 +2,9 @@
 
 const router = require("express").Router();
 const { User, List } = require("../../models");
-//create new user with username, password,  first name, last name, bio, and profile picture
+
+
+//create new user with username, password,  first name, last name, bio, and profile picture -dont touch
 router.post("/", async (req, res) => {
   try {
     const userData = await User.create({
@@ -86,8 +88,8 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//logout
-router.post("/logout", (req, res) => {
+//logout route
+router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
       res.status(204).end();
@@ -97,77 +99,77 @@ router.post("/logout", (req, res) => {
   }
 });
 
-//route to render profile and list data
-router.get("/:id", async (req, res) => {
-  try {
-    const userData = await User.findByPk(req.params.id, {
-      include: [{ model: List }] 
-    });
-    const user = userData.get({ plain: true });
-    res.json(user);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// //route to render profile and list data
+// router.get("/:id", async (req, res) => {
+//   try {
+//     const userData = await User.findByPk(req.params.id, {
+//       include: [{ model: List }] 
+//     });
+//     const user = userData.get({ plain: true });
+//     res.json(user);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 
-//find a user by id and update info
-router.put("/:id", async (req, res) => {
-  try {
-    const userData = await User.update(
-      {
-        userUsername: req.body.userUsername,
-        userPassword: req.body.userPassword,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        bio: req.body.bio,
-        profile_picture: req.body.profile_picture,
-      },
-      {
-        where: {
-          id: req.params.id,
-        },
-      }
-    );
-    if (!userData) {
-      res.status(404).json({ message: "No user found with this id!" });
-      return;
-    }
-    res.status(200).json({ message: "YAY! User data updated" });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// //find a user by id and update info
+// router.put("/:id", async (req, res) => {
+//   try {
+//     const userData = await User.update(
+//       {
+//         userUsername: req.body.userUsername,
+//         userPassword: req.body.userPassword,
+//         firstName: req.body.firstName,
+//         lastName: req.body.lastName,
+//         bio: req.body.bio,
+//         profile_picture: req.body.profile_picture,
+//       },
+//       {
+//         where: {
+//           id: req.params.id,
+//         },
+//       }
+//     );
+//     if (!userData) {
+//       res.status(404).json({ message: "No user found with this id!" });
+//       return;
+//     }
+//     res.status(200).json({ message: "YAY! User data updated" });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
-//get all users- type in http://localhost:3001/api/users
-router.get("/", async (req, res) => {
-  try {
-    const userData = await User.findAll({
-      include: [{ model: List }] 
-    });
-    res.status(200).json(userData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// //get all users- type in http://localhost:3001/api/users
+// router.get("/", async (req, res) => {
+//   try {
+//     const userData = await User.findAll({
+//       include: [{ model: List }] 
+//     });
+//     res.status(200).json(userData);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
-//delete a user by id and all associated tasks and lists by typing in http://localhost:3001/api/users/(id number)
-router.delete("/:id", async (req, res) => {
-  try {
-    const userData = await User.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
-    if (!userData) {
-      res.status(404).json({ message: "No user found with this id!" });
-      return;
-    }
-    res.status(200).json(userData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// //delete a user by id and all associated tasks and lists by typing in http://localhost:3001/api/users/(id number)
+// router.delete("/:id", async (req, res) => {
+//   try {
+//     const userData = await User.destroy({
+//       where: {
+//         id: req.params.id,
+//       },
+//     });
+//     if (!userData) {
+//       res.status(404).json({ message: "No user found with this id!" });
+//       return;
+//     }
+//     res.status(200).json(userData);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 // //DUPLICATE update a single user information by id by typing in http://localhost:3001/api/users/(id number)
 // router.put("/:id", async (req, res) => {
