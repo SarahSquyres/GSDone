@@ -1,4 +1,3 @@
-// put code here for authentication
 const withAuth = (req, res, next) => {
 
   console.log('Req session', req.session);

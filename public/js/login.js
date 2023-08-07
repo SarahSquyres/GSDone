@@ -4,9 +4,6 @@ const loginHandler = async (e) => {
   const userUsername = document.getElementById('inputUsername').value.trim();
   const userPassword = document.getElementById('inputPassword').value.trim();
 
-  // const enteredUsername = userUsername.value.trim();
-  // const enteredPassword = userPassword.value.trim();
-
   if (userPassword && userUsername) {
       console.log(userUsername);
       console.log(userPassword);
@@ -44,7 +41,7 @@ const signupFormHandler = async (e) => {
             headers: { 'Content-Type': 'application/json' },
           });
           if (res.ok) {
-            document.location.replace('/');
+            document.location.replace('/profile');
           } else {
             alert(res.statusText);
           }

@@ -43,7 +43,6 @@ const displayList = (id) =>
         },
     }).then(response => response.json())
         .then(data => {
-            console.log('Tasks data', data);
 
 
             const tableBody = document.querySelector('#task-table tbody');
@@ -60,7 +59,8 @@ const displayList = (id) =>
                     `;
 
                     tableBody.appendChild(row);
-                    // deleteList(checkboxId);
+                    console.log(checkboxId);
+                    console.log(task.id);
                 }
 
             })
@@ -86,28 +86,56 @@ const saveList = () => {
             displayList();
         })
 }
-// need to GET and if it's checked then capture ID 
-const checkedItemBtn = document.querySelector('#btn-complete');
-const deleteList = (id) => {
 
-    const checkedItem = document.querySelector('.todo__checkbox');
+// const deleteButton = document.querySelector('#btn-complete');
 
-    console.log("this is checked item:", id);
+// deleteButton.addEventListener('click', () => {
+//     const checkedCheckboxes = document.querySelectorAll('.todo__checkbox:checked');
 
-    if (checkedItem === on) {
-        fetch(`/api/lists/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-    }
-    console.log("clicked")
-}
+//     const tasksToDelete = Array.from(checkedCheckboxes).map(checkbox => {
+//         return {
+//             id: checkbox.getAttribute('data-task-id')
+//         };
+//     }); 
+  
+//     fetch(`/api/lists/${id}`, {
+//         method: 'DELETE',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(tasksToDelete)
+//     }).then(response => {
+//         if (response.ok) {
+//             displayList();
+//         }
+//     }).catch(error => {
+//         console.error('Error deleting tasks:', error);
+//     });
+// });
 
 
 
-checkedItemBtn.addEventListener("click", deleteList);
+// const checkedItemBtn = document.querySelector('#btn-complete');
+// const checkedItem = document.querySelector('.todo__checkbox');
+// const deleteList = (id) =>
+//     fetch(`/api/lists`, {
+//         method: 'GET',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//     }).then(response => response.json())
+//         .then(data => {
+//             data.tasks.forEach(task => {
+//                 if (task.list_body) {
+//                     let checkboxId = `check-box${task.id}`;
+//                 }
+//             }).then(function (res) {
+//                 if (checkedItem === checkboxId) {
+//                     return console.log("did this work?")
+//                 }
+//             })
+//         })
+
 
 displayList();
 
