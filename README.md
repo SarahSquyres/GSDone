@@ -5,7 +5,7 @@
 * [Description](#description)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Contributions](#contributions)
+* [Contributors](#contributors)
 * [License](#license)
 * [Sources](#sources)
 * [Questions](#questions)
@@ -13,33 +13,42 @@
 
 ## Description
 
-GSDone is a task management application that allows users to create, update, and delete tasks. Users can also share their tasks to a feed where other users can view and comment on them.
+GSDone is a task management application for individuals that want to Get Sht Done.  This app provides a beautiful yet simple user interface.  With GSD,  users can create a user profile and add to-do items.  We know our users are busy, and thanks to our app, they can GSDone!
+
 
 ## Installation
 
 To install the necessary dependencies, run the following command:
 
-
 npm i 
-
 
 
 ## Usage
 
 To use this application, run the following command:
 
-
 npm start
 
 
-## Contributions
+## Contributors
 
-To contribute to this project, please send an email to the address listed below.
+Bo Salinas
+Emily Arizcorreta
+Sarah Squyres
+
 
 ## License
 
 This project is licensed under the MIT license.
 
+
 ## Sources
 
+We would like to first thank our tutors and TAs for supporting us as we develop our project.  
+
+Other Sources:
+W3 School
+Google Bard
+https://www.npmjs.com/package/express-list-endpoints
+https://www.npmjs.com/package/cookie-session 
 
