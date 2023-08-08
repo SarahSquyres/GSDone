@@ -39,15 +39,16 @@ User.init(
     profile_picture: {
       type: DataTypes.STRING,
       allowNull: true,
-      
     },
   },
   {
-    //creates and updates a user's password
     hooks: {
       // POST
       beforeCreate: async (newUserData) => {
-        newUserData.userPassword = await bcrypt.hash(newUserData.userPassword, 10);
+        newUserData.userPassword = await bcrypt.hash(
+          newUserData.userPassword,
+          10
+        );
         return newUserData;
       },
       // PUT

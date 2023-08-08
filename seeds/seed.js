@@ -1,7 +1,7 @@
-const sequelize = require('../config/connection');
-const { User, List } = require('../models');
-const userData = require('./userData.json');
-const listData = require('./listData.json');
+const sequelize = require("../config/connection");
+const { User, List } = require("../models");
+const userData = require("./userData.json");
+const listData = require("./listData.json");
 // const commentData = require('./commentData.json');
 
 const seedDatabase = async () => {
@@ -16,7 +16,7 @@ const seedDatabase = async () => {
     await List.create({
       ...list,
       user_id: users[Math.floor(Math.random() * users.length)].id,
-  });
+    });
   }
 
   process.exit(0);

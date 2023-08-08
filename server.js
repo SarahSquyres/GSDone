@@ -1,14 +1,14 @@
-const path = require('path');
-const express = require('express');
-const session = require('express-session');
-const exphbs = require('express-handlebars');
-const routes = require('./controllers');
-const helpers = require('./utils/helpers');
+const path = require("path");
+const express = require("express");
+const session = require("express-session");
+const exphbs = require("express-handlebars");
+const routes = require("./controllers");
+const helpers = require("./utils/helpers");
 
-const sequelize = require('./config/connection');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const sequelize = require("./config/connection");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
-const listEndpoints = require('express-list-endpoints');
+const listEndpoints = require("express-list-endpoints");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -18,28 +18,28 @@ const hbs = exphbs.create({ helpers });
 app.use(express.json());
 
 const sess = {
-  name:"monster", //name of cookie
-  secret: process.env.SECRET, //secret that makes the cookies effective
+  name: "monster",
+  secret: process.env.SECRET,
   cookie: {
-    maxAge: 1000 * 60 * 60, //cookie expires after 1 hour
-    secure: false, //set to true if using https
-    httpOnly: true, //true means cookie is not accessible via front end JS
+    maxAge: 1000 * 60 * 60,
+    secure: false,
+    httpOnly: true,
   },
-  resave: false, //resave cookie even if no changes made
-  saveUninitialized: false, //don't save cookie if there is no data to store gdpr laws user has to give permission
+  resave: false,
+  saveUninitialized: false,
   store: new SequelizeStore({
-    db: sequelize
-  })
-}
+    db: sequelize,
+  }),
+};
 
 app.use(session(sess));
 
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
+app.engine("handlebars", hbs.engine);
+app.set("view engine", "handlebars");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(routes);
 console.log(listEndpoints(app));
