@@ -4,8 +4,8 @@ const listDescription = document.getElementById("list-container");
 const createListBtn = document.getElementById("save-list");
 const inputListName = document.getElementById("task-name");
 const submitTaskButton = document.getElementById("btn-post");
+const checkboxStates = JSON.parse(localStorage.getItem('checkboxStates')) || {};
 
-// Prevent going to another page
 const formEl = document.querySelector(".new-task-form");
 formEl.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -24,9 +24,7 @@ const getList = (id) =>
       const tableBody = document.querySelector("#tbody");
       const newRow = document.createElement("tr");
       const listCell = document.createElement("td");
-
       listCell.textContent = data;
-
       newRow.appendChild(listCell);
       tableBody.appendChild(newRow);
     });
@@ -42,15 +40,12 @@ const displayList = (id) =>
     .then((data) => {
       const tableBody = document.querySelector("#task-table tbody");
       tableBody.innerHTML = "";
-
       data.tasks.forEach((task) => {
         if (task.list_body) {
-          let checkboxId = `check-box${task.id}`;
           const row = document.createElement("tr");
-          row.innerHTML = ` <th scope="row"><input class="todo__checkbox" type="checkbox" id="${checkboxId}"></th>
-                    <td class="text-break">${task.list_body}</td>
+          row.innerHTML = ` <th scope="row"><input class="todo__checkbox" type="checkbox"></th>
+                  <td class="text-break">${task.list_body}<button class="btn-delete" data-task-id="${task.id}">Delete</button></td>
                     `;
-
           tableBody.appendChild(row);
         }
       });
@@ -58,7 +53,6 @@ const displayList = (id) =>
 
 const saveList = () => {
   const inputListNameText = inputListName.value;
-
   fetch("/api/lists", {
     method: "POST",
     headers: {
@@ -73,4 +67,29 @@ const saveList = () => {
       displayList();
     });
 };
+
+const tableBody = document.querySelector("#task-table tbody");
+tableBody.addEventListener("click", (event) => {
+  if (event.target.classList.contains("btn-delete")) {
+    const taskId = event.target.dataset.taskId;
+    deleteList(taskId);
+  }
+});
+
+const deleteList = (taskId) => {
+  fetch(`/api/lists/${taskId}`, {
+    method: "DELETE",
+  })
+    .then((response) => {
+      if (response.ok) {
+        displayList();
+      } else {
+        console.error('Failed to delete task', response.status);
+      }
+    })
+    .catch((error) => {
+      console.error('Error in fetch request:', error);
+    });
+};
+
 displayList();
