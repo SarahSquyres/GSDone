@@ -43,10 +43,21 @@ const displayList = (id) =>
       data.tasks.forEach((task) => {
         if (task.list_body) {
           const row = document.createElement("tr");
-          row.innerHTML = ` <th scope="row"><input class="todo__checkbox" type="checkbox"></th>
-                  <td class="text-break">${task.list_body}<button class="btn-delete" data-task-id="${task.id}">Delete</button></td>
-                    `;
+          const checkboxId = `checkbox-${task.id}`
+          const isChecked = checkboxStates[checkboxId] || false;
+          row.innerHTML = ` <th scope="row">
+          <input class="todo-checkbox" type="checkbox" id="${checkboxId}" ${isChecked ? 'checked' : ''}>
+          </th>
+          <td class="text-break">
+          ${task.list_body}<button class="btn-delete" data-task-id="${task.id}">Delete</button>
+          </td>
+          `;
           tableBody.appendChild(row);
+          const checkbox = row.querySelector('.todo-checkbox');
+          checkbox.addEventListener('change', () => {
+            checkboxStates[checkboxId] = checkbox.checked;
+            localStorage.setItem('checkboxStates', JSON.stringify(checkboxStates));
+          })
         }
       });
     });
