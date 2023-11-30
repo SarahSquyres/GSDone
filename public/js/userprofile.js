@@ -46,10 +46,12 @@ const displayList = (id) =>
           const checkboxId = `checkbox-${task.id}`
           const isChecked = checkboxStates[checkboxId] || false;
           row.innerHTML = ` <th scope="row">
-          <input class="todo-checkbox" type="checkbox" id="${checkboxId}" ${isChecked ? 'checked' : ''}>
+          <div style="display: flex; justify-content: center; align-items: center; margin-top: .5rem">
+            <input class="todo-checkbox" type="checkbox" id="${checkboxId}" ${isChecked ? 'checked' : ''}>
+          </div>
           </th>
           <td class="text-break">
-          ${task.list_body}<button class="btn-delete" data-task-id="${task.id}">Delete</button>
+          ${task.list_body}<button class="btn-delete" style="float: right;" data-task-id="${task.id}">Delete</button>
           </td>
           `;
           tableBody.appendChild(row);
